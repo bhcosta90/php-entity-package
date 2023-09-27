@@ -1,0 +1,58 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Costa\Data;
+
+use Carbon\Carbon;
+use Costa\Data\Traits\toArrayTrait;
+use Costa\Data\Traits\FromTrait;
+use Costa\Data\Traits\MethodMagicsTrait;
+use Costa\Data\ValueObject\Uuid;
+
+abstract class Data
+{
+    use MethodMagicsTrait;
+    use FromTrait;
+    use toArrayTrait;
+
+    protected readonly Uuid $id;
+
+    protected readonly Carbon $createdAt;
+
+    protected Carbon $updatedAt;
+
+    protected function generateId(): Uuid
+    {
+        return Uuid::make();
+    }
+
+    protected function generateCreatedAt(): Carbon
+    {
+        return Carbon::now();
+    }
+
+    protected function generateUpdatedAt(): Carbon
+    {
+        return Carbon::now();
+    }
+
+    protected function setId(string $id): self
+    {
+        $this->id = new Uuid($id);
+        return $this;
+    }
+
+    protected function setCreatedAt(string $date): self
+    {
+        $this->createdAt = Carbon::now()->parse($date);
+        return $this;
+    }
+
+    protected function setUpdatedAt(string $date): self
+    {
+        $this->updatedAt = Carbon::now()->parse($date);
+        return $this;
+    }
+
+}
