@@ -21,7 +21,7 @@ trait toArrayTrait
     {
         $response = $this->converterInArray($underscore);
         if ($errors = $this->validate($response)) {
-            throw ValidationException::withMessages($errors);
+            throw ValidationException::withMessages(static::class, $errors);
         }
         return $response;
     }

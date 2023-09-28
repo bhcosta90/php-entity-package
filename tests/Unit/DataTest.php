@@ -10,7 +10,6 @@ use Stubs\OrderStub;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotNull;
-use function PHPUnit\Framework\assertTrue;
 
 beforeEach(function () {
     $this->address = new AddressStub();

@@ -10,12 +10,12 @@ class ValidationException extends Exception
 {
     protected array $errors = [];
 
-    public static function withMessages(array $messages, int $status = 422): static
+    public static function withMessages(string $key, array $messages, int $status = 422): static
     {
         $class = new ValidationException("validation error", $status);
 
         foreach ($messages as $message) {
-            $class->add($message);
+            $class->add($key . ": " . $message);
         }
 
         return $class;
