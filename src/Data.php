@@ -14,8 +14,6 @@ abstract class Data
     use MethodMagicsTrait;
     use FromTrait;
 
-    public abstract function __construct(...$args);
-
     protected readonly Uuid $id;
 
     protected readonly Carbon $createdAt;
