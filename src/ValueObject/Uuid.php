@@ -15,6 +15,15 @@ class Uuid implements ValueObject
         $this->validate();
     }
 
+    protected function validate(): void
+    {
+        if (!UuidUuid::isValid($this->value)) {
+            throw new InvalidArgumentException(
+                sprintf('<%s> does not allow the value <%s>', static::class, $this->value)
+            );
+        }
+    }
+
     public static function make(): self
     {
         return new self(UuidUuid::uuid7()->toString());
@@ -23,14 +32,5 @@ class Uuid implements ValueObject
     public function __toString(): string
     {
         return $this->value;
-    }
-
-    protected function validate(): void
-    {
-        if (!UuidUuid::isValid($this->value)) {
-            throw new InvalidArgumentException(
-                sprintf('<%s> does not allow the value <%s>', static::class, $this->value)
-            );
-        }
     }
 }

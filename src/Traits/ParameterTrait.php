@@ -19,6 +19,14 @@ trait ParameterTrait
         return $constructor->getParameters();
     }
 
+    /**
+     * @return ReflectionClass
+     */
+    public static function getReflectionClass(): ReflectionClass
+    {
+        return new ReflectionClass(static::class);
+    }
+
     public function getProperties(): array
     {
         $reflectionClass = self::getReflectionClass();
@@ -31,14 +39,6 @@ trait ParameterTrait
         }
 
         return $response;
-    }
-
-    /**
-     * @return ReflectionClass
-     */
-    public static function getReflectionClass(): ReflectionClass
-    {
-        return new ReflectionClass(static::class);
     }
 
 }

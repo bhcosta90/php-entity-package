@@ -14,9 +14,15 @@ describe("Uuid Unit Test", function () {
             ->and(strlen($uuid))->toBe(36);
     });
 
-    test("sending an invalid uuid", function(){
-        expect(fn() => new Uuid('testing'))->toThrow(new InvalidArgumentException(sprintf(
-            '<%s> does not allow the value <%s>', Uuid::class, 'testing'
-        )));
+    test("sending an invalid uuid", function () {
+        expect(fn() => new Uuid('testing'))->toThrow(
+            new InvalidArgumentException(
+                sprintf(
+                    '<%s> does not allow the value <%s>',
+                    Uuid::class,
+                    'testing'
+                )
+            )
+        );
     });
 });

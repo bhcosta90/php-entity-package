@@ -1,33 +1,33 @@
 {
-    "name": "bhcosta90/data",
-    "autoload": {
-        "psr-4": {
-            "Costa\\Data\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Stubs\\": "tests/Stubs"
-        }
-    },
-    "authors": [
-        {
-            "name": "Bruno Costa",
-            "email": "bhcosta90@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^8.1",
-        "ramsey/uuid": "^4.7",
-        "nesbot/carbon": "^2.71"
-    },
-    "require-dev": {
-        "pestphp/pest": "^2.19",
-        "symfony/var-dumper": "^6.3"
-    },
-    "config": {
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
+  "name": "bhcosta90/data",
+  "autoload": {
+    "psr-4": {
+      "Costa\\Data\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Stubs\\": "tests/Stubs"
+    }
+  },
+  "authors": [
+    {
+      "name": "Bruno Costa",
+      "email": "bhcosta90@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "ramsey/uuid": "^4.7",
+    "nesbot/carbon": "^2.71"
+  },
+  "require-dev": {
+    "pestphp/pest": "^2.19",
+    "symfony/var-dumper": "^6.3"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
 }
