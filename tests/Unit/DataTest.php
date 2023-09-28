@@ -80,6 +80,10 @@ describe("Data Unit Test", function () {
                 assertEquals(422, $e->status());
             }
         });
+
+        test("to json", function(){
+            dump($this->data->toJSON());
+        });
     });
 
     describe("Setting a data", function () {

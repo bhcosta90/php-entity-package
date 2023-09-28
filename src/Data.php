@@ -8,12 +8,14 @@ use Carbon\Carbon;
 use Costa\Entity\Contracts\DataInterface;
 use Costa\Entity\Traits\FromTrait;
 use Costa\Entity\Traits\MethodMagicsTrait;
+use Costa\Entity\Traits\toJSONTrait;
 use Costa\Entity\ValueObject\Uuid;
 
 abstract class Data
 {
     use MethodMagicsTrait;
     use FromTrait;
+    use toJSONTrait;
 
     public function update(...$data): void
     {
