@@ -8,5 +8,8 @@ use Costa\Data\Data;
 
 class OrderStub extends Data
 {
-
+    protected function toArray(): array
+    {
+        return [];
+    }
 }

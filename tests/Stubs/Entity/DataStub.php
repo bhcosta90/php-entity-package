@@ -17,4 +17,20 @@ class DataStub extends Data
     ) {
         //
     }
+
+    protected function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'email' => $this->email,
+        ];
+    }
+
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|min:3|max:150',
+            'email' => 'required|email|min:3',
+        ];
+    }
 }

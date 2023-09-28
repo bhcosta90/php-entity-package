@@ -18,4 +18,9 @@ class AddressStub extends Data
             'zipcode' => 'required'
         ];
     }
+
+    protected function toArray(): array
+    {
+        return [];
+    }
 }

@@ -12,7 +12,7 @@ trait ParameterTrait
     /**
      * @return ReflectionParameter[]
      */
-    public static function getConstructorParameter(): array
+    protected static function getConstructorParameter(): array
     {
         $reflectionClass = self::getReflectionClass();
         $constructor = $reflectionClass->getConstructor();
@@ -22,12 +22,12 @@ trait ParameterTrait
     /**
      * @return ReflectionClass
      */
-    public static function getReflectionClass(): ReflectionClass
+    protected static function getReflectionClass(): ReflectionClass
     {
         return new ReflectionClass(static::class);
     }
 
-    public function getProperties(): array
+    protected function getProperties(): array
     {
         $reflectionClass = self::getReflectionClass();
         $properties = $reflectionClass->getProperties();
