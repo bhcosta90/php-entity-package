@@ -8,7 +8,14 @@ use Costa\Data\Data;
 
 class AddressStub extends Data
 {
-    public function __construct()
+    public function __construct(protected string $zipcode)
     {
+    }
+
+    public function rules(): array
+    {
+        return [
+            'zipcode' => 'required'
+        ];
     }
 }

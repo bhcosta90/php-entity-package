@@ -12,7 +12,7 @@ use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotNull;
 
 beforeEach(function () {
-    $this->address = new AddressStub();
+    $this->address = new AddressStub(zipcode: '00000000');
     $this->orders = [
         new OrderStub(),
         new OrderStub(),
@@ -90,7 +90,7 @@ describe("Data Unit Test", function () {
     });
 
     describe("Setting a data", function () {
-        test("a", function () {
+        test("aaaaaaaaaaaaaa", function () {
             $entity = DataStub::from([
                 'name' => 'testing',
                 'email' => 'test@test.com',
@@ -98,7 +98,7 @@ describe("Data Unit Test", function () {
                 'created_at' => '2000-01-01',
                 'updated_at' => '2000-01-02',
                 'contacts' => ['a', 'b'],
-                'address' => new AddressStub(),
+                'address' => new AddressStub(zipcode: '00000000'),
                 'orders' => [new OrderStub(), new OrderStub()],
             ]);
 
