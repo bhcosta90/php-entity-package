@@ -7,16 +7,29 @@ namespace Costa\Data\Traits;
 use Carbon\Carbon;
 use Costa\Data\Contracts\ValueObject;
 use Costa\Data\Data;
+use Costa\Data\Exceptions\ValidationException;
 use Exception;
 
 trait toArrayTrait
 {
-    use ParameterTrait, MethodMagicsTrait;
+    use ParameterTrait, MethodMagicsTrait, ValidationTrait;
 
     /**
      * @throws Exception
      */
     public function toArray($underscore = true): array
+    {
+        $response = $this->converterInArray($underscore);
+        if ($errors = $this->validate($response)) {
+            throw ValidationException::withMessages($errors);
+        }
+        return $response;
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function converterInArray($underscore = true): array
     {
         $response = [];
 
@@ -51,7 +64,7 @@ trait toArrayTrait
      * @return array|mixed|string
      * @throws Exception
      */
-    public function getResult($result, mixed $underscore): mixed
+    protected function getResult($result, mixed $underscore): mixed
     {
         if ($result instanceof Data) {
             $result = $result->toArray($underscore);

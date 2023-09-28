@@ -1,13 +1,16 @@
 <?php
 
 use Carbon\Carbon;
+use Costa\Data\Exceptions\ValidationException;
 use Costa\Data\ValueObject\Uuid;
 use Stubs\AddressStub;
 use Stubs\DataStub;
 use Stubs\OrderStub;
 
+use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotNull;
+use function PHPUnit\Framework\assertTrue;
 
 beforeEach(function () {
     $this->address = new AddressStub();
@@ -64,6 +67,26 @@ describe("Data Unit Test", function () {
                     $this->orders[1]->toArray(),
                     $this->orders[2]->toArray(),
                 ]);
+        });
+
+        test("validation name", function () {
+            $entity = DataStub::from(
+                name: 'a',
+                email: 'b',
+                contacts: $this->contacts,
+                address: $this->address,
+                orders: $this->orders,
+            );
+
+            try {
+                $entity->toArray();
+            } catch (ValidationException $e) {
+                assertEquals([
+                    'The Name minimum is 3',
+                    'The Email is not valid email',
+                    'The Email minimum is 3',
+                ], $e->errors());
+            }
         });
     });
 
