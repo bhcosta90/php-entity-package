@@ -27,18 +27,4 @@ trait ParameterTrait
         return new ReflectionClass(static::class);
     }
 
-    protected function getProperties(): array
-    {
-        $reflectionClass = self::getReflectionClass();
-        $properties = $reflectionClass->getProperties();
-
-        $response = [];
-
-        foreach ($properties as $propriedade) {
-            $response[] = $propriedade->getName();
-        }
-
-        return $response;
-    }
-
 }

@@ -75,6 +75,8 @@ describe("Data Unit Test", function () {
                     'Stubs\Entity\DataStub: The Email is not valid email',
                     'Stubs\Entity\DataStub: The Email minimum is 3',
                 ], $e->errors());
+
+                assertEquals(422, $e->status());
             }
         });
     });
