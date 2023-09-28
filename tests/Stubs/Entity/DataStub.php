@@ -33,4 +33,9 @@ class DataStub extends Data
             'email' => 'required|email|min:3',
         ];
     }
+
+    protected function fillable(): array
+    {
+        return ['name'];
+    }
 }

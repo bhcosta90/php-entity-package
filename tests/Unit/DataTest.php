@@ -10,6 +10,7 @@ use Stubs\Entity\OrderStub;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotEquals;
 use function PHPUnit\Framework\assertNotNull;
 
 beforeEach(function () {
@@ -102,6 +103,26 @@ describe("Data Unit Test", function () {
 
             assertInstanceOf(Carbon::class, $entity->updated_at);
             expect('2000-01-02')->toBe($entity->updated_at->format('Y-m-d'));
+        });
+    });
+
+    describe("Update a data", function(){
+        beforeEach(fn() => $this->data = new DataStub(
+            name: 'testing',
+            email: 'test@test.com',
+            contacts: $this->contacts,
+            address: $this->address,
+            orders: $this->orders
+        ));
+
+        test("update name", function(){
+            $this->data->update(
+                name: 'hahahah',
+                email: 'test123@test.com',
+            );
+
+            assertEquals("hahahah", $this->data->name);
+            assertNotEquals("test123@test.com", $this->data->email);
         });
     });
 });
