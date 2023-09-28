@@ -82,28 +82,26 @@ describe("Data Unit Test", function () {
         });
     });
 
-    describe("Setting a data", function () {
-        test("aaaaaaaaaaaaaa", function () {
-            $entity = DataStub::from([
-                'name' => 'testing',
-                'email' => 'test@test.com',
-                'id' => '586ea122-f366-4a0f-ad7b-3083c6383f82',
-                'created_at' => '2000-01-01',
-                'updated_at' => '2000-01-02',
-                'contacts' => ['a', 'b'],
-                'address' => new AddressStub(zipcode: '00000000'),
-                'orders' => [new OrderStub(), new OrderStub()],
-            ]);
+    test("Setting a data", function () {
+        $entity = DataStub::from([
+            'name' => 'testing',
+            'email' => 'test@test.com',
+            'id' => '586ea122-f366-4a0f-ad7b-3083c6383f82',
+            'created_at' => '2000-01-01',
+            'updated_at' => '2000-01-02',
+            'contacts' => ['a', 'b'],
+            'address' => new AddressStub(zipcode: '00000000'),
+            'orders' => [new OrderStub(), new OrderStub()],
+        ]);
 
-            assertInstanceOf(Uuid::class, $entity->id);
-            expect('586ea122-f366-4a0f-ad7b-3083c6383f82')->toBe((string)$entity->id);
+        assertInstanceOf(Uuid::class, $entity->id);
+        expect('586ea122-f366-4a0f-ad7b-3083c6383f82')->toBe((string)$entity->id);
 
-            assertInstanceOf(Carbon::class, $entity->created_at);
-            expect('2000-01-01')->toBe($entity->created_at->format('Y-m-d'));
+        assertInstanceOf(Carbon::class, $entity->created_at);
+        expect('2000-01-01')->toBe($entity->created_at->format('Y-m-d'));
 
-            assertInstanceOf(Carbon::class, $entity->updated_at);
-            expect('2000-01-02')->toBe($entity->updated_at->format('Y-m-d'));
-        });
+        assertInstanceOf(Carbon::class, $entity->updated_at);
+        expect('2000-01-02')->toBe($entity->updated_at->format('Y-m-d'));
     });
 
     describe("Update a data", function(){
