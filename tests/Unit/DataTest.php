@@ -56,37 +56,6 @@ describe("Data Unit Test", function () {
             assertNotNull($entity->createdAt);
             assertNotNull($entity->updatedAt);
         });
-
-        test("to array", function () {
-            $data = $this->data->toArray();
-
-            expect($data['contacts'])->toBe($this->contacts)
-                ->and($data['orders'])->toBe([
-                    $this->orders[0]->toArray(),
-                    $this->orders[1]->toArray(),
-                    $this->orders[2]->toArray(),
-                ]);
-        });
-
-        test("validation name", function () {
-            $entity = DataStub::from(
-                name: 'a',
-                email: 'b',
-                contacts: $this->contacts,
-                address: $this->address,
-                orders: $this->orders,
-            );
-
-            try {
-                $entity->toArray();
-            } catch (ValidationException $e) {
-                assertEquals([
-                    'Stubs\DataStub: The Name minimum is 3',
-                    'Stubs\DataStub: The Email is not valid email',
-                    'Stubs\DataStub: The Email minimum is 3',
-                ], $e->errors());
-            }
-        });
     });
 
     describe("Setting a data", function () {

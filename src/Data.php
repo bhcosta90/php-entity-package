@@ -7,14 +7,12 @@ namespace Costa\Data;
 use Carbon\Carbon;
 use Costa\Data\Traits\FromTrait;
 use Costa\Data\Traits\MethodMagicsTrait;
-use Costa\Data\Traits\toArrayTrait;
 use Costa\Data\ValueObject\Uuid;
 
 abstract class Data
 {
     use MethodMagicsTrait;
     use FromTrait;
-    use toArrayTrait;
 
     protected readonly Uuid $id;
 

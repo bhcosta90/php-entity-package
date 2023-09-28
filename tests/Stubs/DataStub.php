@@ -17,12 +17,4 @@ class DataStub extends Data
     ) {
         //
     }
-
-    public function rules(): array
-    {
-        return [
-            'name' => 'required|min:3|max:120',
-            'email' => 'required|email|min:3|max:120',
-        ];
-    }
 }
