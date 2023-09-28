@@ -81,9 +81,9 @@ describe("Data Unit Test", function () {
                 $entity->toArray();
             } catch (ValidationException $e) {
                 assertEquals([
-                    'The Name minimum is 3',
-                    'The Email is not valid email',
-                    'The Email minimum is 3',
+                    'Stubs\DataStub: The Name minimum is 3',
+                    'Stubs\DataStub: The Email is not valid email',
+                    'Stubs\DataStub: The Email minimum is 3',
                 ], $e->errors());
             }
         });
