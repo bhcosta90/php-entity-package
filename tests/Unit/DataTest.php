@@ -1,11 +1,10 @@
 <?php
 
 use Carbon\Carbon;
-use Costa\Data\Exceptions\ValidationException;
 use Costa\Data\ValueObject\Uuid;
-use Stubs\AddressStub;
-use Stubs\DataStub;
-use Stubs\OrderStub;
+use Stubs\Entity\AddressStub;
+use Stubs\Entity\DataStub;
+use Stubs\Entity\OrderStub;
 
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
