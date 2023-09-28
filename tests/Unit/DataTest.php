@@ -120,7 +120,7 @@ describe("Data Unit Test", function () {
             );
 
             assertEquals("hahahah", $this->data->name);
-            assertNotEquals("test123@test.com", $this->data->email);
+            assertEquals("test@test.com", $this->data->email);
         });
     });
 });
