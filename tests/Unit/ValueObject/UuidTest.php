@@ -1,11 +1,11 @@
 <?php
 
-use Costa\Entity\Contracts\ValueObject;
+use Costa\Entity\Contracts\ValueObjectInterface;
 use Costa\Entity\ValueObject\Uuid;
 
 describe("Uuid Unit Test", function () {
     test("give type of the class", function () {
-        expect(Uuid::make())->toBeInstanceOf(ValueObject::class);
+        expect(Uuid::make())->toBeInstanceOf(ValueObjectInterface::class);
     });
 
     test("return a string uuid", function () {

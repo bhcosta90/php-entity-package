@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Costa\Entity\ValueObject;
 
-use Costa\Entity\Contracts\ValueObject;
+use Costa\Entity\Contracts\ValueObjectInterface;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as UuidUuid;
 
-class Uuid implements ValueObject
+class Uuid implements ValueObjectInterface
 {
     public function __construct(protected string $value)
     {
