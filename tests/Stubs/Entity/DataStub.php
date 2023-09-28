@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Stubs\Entity;
 
-use Costa\Data\Data;
+use Costa\Entity\Data;
 
 class DataStub extends Data
 {

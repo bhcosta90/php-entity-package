@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Stubs;
 
-use Costa\Data\Data;
+use Costa\Entity\Data;
 
 class MethodMagicsStub extends Data
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Costa\Data\Contracts;
+namespace Costa\Entity\Contracts;
 
 interface ValueObject
 {

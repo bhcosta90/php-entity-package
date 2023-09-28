@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Costa\Data\ValueObject;
+namespace Costa\Entity\ValueObject;
 
-use Costa\Data\Contracts\ValueObject;
+use Costa\Entity\Contracts\ValueObject;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as UuidUuid;
 

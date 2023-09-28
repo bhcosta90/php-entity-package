@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Costa\Data\Traits;
+namespace Costa\Entity\Traits;
 
 trait MethodsTrait
 {

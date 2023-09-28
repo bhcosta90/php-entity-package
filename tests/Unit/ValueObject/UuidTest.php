@@ -1,7 +1,7 @@
 <?php
 
-use Costa\Data\Contracts\ValueObject;
-use Costa\Data\ValueObject\Uuid;
+use Costa\Entity\Contracts\ValueObject;
+use Costa\Entity\ValueObject\Uuid;
 
 describe("Uuid Unit Test", function () {
     test("give type of the class", function () {

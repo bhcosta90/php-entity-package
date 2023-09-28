@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Costa\Data;
+namespace Costa\Entity;
 
 use Carbon\Carbon;
-use Costa\Data\Traits\FromTrait;
-use Costa\Data\Traits\MethodMagicsTrait;
-use Costa\Data\ValueObject\Uuid;
+use Costa\Entity\Traits\FromTrait;
+use Costa\Entity\Traits\MethodMagicsTrait;
+use Costa\Entity\ValueObject\Uuid;
 
 abstract class Data
 {

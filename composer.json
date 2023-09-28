@@ -1,8 +1,8 @@
 {
-  "name": "bhcosta90/data",
+  "name": "bhcosta90/entity",
   "autoload": {
     "psr-4": {
-      "Costa\\Data\\": "src/"
+      "Costa\\Entity\\": "src/"
     }
   },
   "autoload-dev": {

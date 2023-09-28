@@ -1,8 +1,8 @@
 <?php
 
 use Carbon\Carbon;
-use Costa\Data\Exceptions\ValidationException;
-use Costa\Data\ValueObject\Uuid;
+use Costa\Entity\Exceptions\ValidationException;
+use Costa\Entity\ValueObject\Uuid;
 use Stubs\Entity\AddressStub;
 use Stubs\Entity\DataStub;
 use Stubs\Entity\OrderStub;

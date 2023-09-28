@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Costa\Data\Validator;
+namespace Costa\Entity\Validator;
 
 use Rakit\Validation\Validator;
 

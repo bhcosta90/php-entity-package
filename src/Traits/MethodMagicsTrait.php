@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Costa\Data\Traits;
+namespace Costa\Entity\Traits;
 
-use Costa\Data\Exceptions\ValidationException;
+use Costa\Entity\Exceptions\ValidationException;
 use Exception;
 
 trait MethodMagicsTrait

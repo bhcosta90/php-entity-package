@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Costa\Data\Traits;
+namespace Costa\Entity\Traits;
 
-use Costa\Data\Validator\RakitValidation;
+use Costa\Entity\Validator\RakitValidation;
 use Exception;
 
 trait ValidationTrait

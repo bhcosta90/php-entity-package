@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Costa\Data\Exceptions;
+namespace Costa\Entity\Exceptions;
 
 use Exception;
 
