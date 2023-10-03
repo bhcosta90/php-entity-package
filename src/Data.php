@@ -21,11 +21,6 @@ abstract class Data
 
     protected Carbon $updatedAt;
 
-    protected function fillable(): array
-    {
-        return [];
-    }
-
     protected function generateId(): Uuid
     {
         return Uuid::make();
