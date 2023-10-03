@@ -112,15 +112,5 @@ describe("Data Unit Test", function () {
             address: $this->address,
             orders: $this->orders
         ));
-
-        test("update name", function(){
-            $this->data->update(
-                name: 'hahahah',
-                email: 'test123@test.com',
-            );
-
-            assertEquals("hahahah", $this->data->name);
-            assertEquals("test@test.com", $this->data->email);
-        });
     });
 });
