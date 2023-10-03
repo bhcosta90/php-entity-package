@@ -15,25 +15,11 @@ abstract class Data
     use MethodMagicsTrait;
     use FromTrait;
 
-    public function update(...$data): void
-    {
-        foreach ($data as $key => $value) {
-            if (in_array($key, $this->fillable())) {
-                $this->{$key} = $value;
-            }
-        }
-    }
-
     protected readonly Uuid $id;
 
     protected readonly Carbon $createdAt;
 
     protected Carbon $updatedAt;
-
-    protected function fillable(): array
-    {
-        return [];
-    }
 
     protected function generateId(): Uuid
     {
