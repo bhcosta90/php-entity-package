@@ -40,6 +40,7 @@ describe("Customer Unit Test", function () {
                 name: 't'
             );
             $customer->toArray();
+            assertTrue(false);
         } catch (ValidationException $e) {
             assertEquals($e->errors(), [
                 "Stubs\Customer: The Name minimum is 3",

@@ -26,10 +26,6 @@ trait ValidateTrait
             $this->addError(static::class, $error);
         }
 
-        if ($this->hasError()) {
-            throw ValidationException::withMessages(static::class, array_map(fn($e) => $e['message'], $this->errors()));
-        }
-
         return !count($response);
     }
 
