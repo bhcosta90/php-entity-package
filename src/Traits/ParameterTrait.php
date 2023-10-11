@@ -12,16 +12,16 @@ trait ParameterTrait
     /**
      * @return ReflectionParameter[]
      */
-    protected static function getConstructorParameter(): array
+    protected function getConstructorParameter(): array
     {
-        $reflectionClass = self::getReflectionClass();
+        $reflectionClass = $this->getReflectionClass();
         $constructor = $reflectionClass->getConstructor();
         return $constructor->getParameters();
     }
 
-    protected static function getProperties(): array
+    protected function getProperties(): array
     {
-        $reflectionClass = self::getReflectionClass();
+        $reflectionClass = $this->getReflectionClass();
         return array_map(fn($property) => [
             'name' => $property->getName(),
             'type' => $property->getType()->getName(),
@@ -31,8 +31,8 @@ trait ParameterTrait
     /**
      * @return ReflectionClass
      */
-    private static function getReflectionClass(): ReflectionClass
+    private function getReflectionClass(): ReflectionClass
     {
-        return new ReflectionClass(static::class);
+        return new ReflectionClass($this);
     }
 }
