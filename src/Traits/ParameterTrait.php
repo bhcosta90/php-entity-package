@@ -31,7 +31,7 @@ trait ParameterTrait
     /**
      * @return ReflectionClass
      */
-    private function getReflectionClass(): ReflectionClass
+    protected function getReflectionClass(): ReflectionClass
     {
         return new ReflectionClass($this);
     }
