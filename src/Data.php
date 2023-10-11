@@ -10,4 +10,5 @@ use Costa\Entity\Traits\MethodMagicTrait;
 abstract class Data
 {
     use MethodMagicTrait;
+    use EntityTrait;
 }
