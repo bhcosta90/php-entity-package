@@ -31,6 +31,7 @@ describe("Customer Unit Test", function () {
 
         assertEquals([
             'name' => 'testing',
+            'id' => (string)$customer->id,
         ], $customer->toArray());
     });
 
