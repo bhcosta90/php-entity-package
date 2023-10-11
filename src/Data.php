@@ -22,6 +22,9 @@ abstract class Data
         return Uuid::make();
     }
 
+    /**
+     * @throws Exception
+     */
     public function __get($p)
     {
         if (property_exists($this, $p)) {
