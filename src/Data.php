@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Costa\Entity;
 
 use Carbon\Carbon;
-use Costa\Entity\Contracts\DataInterface;
 use Costa\Entity\Traits\FromTrait;
 use Costa\Entity\Traits\MethodMagicsTrait;
 use Costa\Entity\ValueObject\Uuid;
