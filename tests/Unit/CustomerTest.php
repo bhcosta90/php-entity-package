@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Costa\Entity\Exceptions\PropertyException;
 use Stubs\Customer;
 
 use function PHPUnit\Framework\assertEquals;
@@ -15,5 +16,11 @@ describe("Customer Unit Test", function () {
         assertNotNull($customer->id);
         assertNotNull($customer->createdAt);
         assertNotNull($customer->updatedAt);
+    });
+
+    test("exception when do not exist property", function(){
+        $customer = new Customer(name: 'testing');
+
+        expect(fn() => $customer->email)->toThrow(PropertyException::class);
     });
 });
