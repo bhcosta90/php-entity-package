@@ -19,12 +19,20 @@ trait ParameterTrait
         return $constructor->getParameters();
     }
 
+    protected static function getProperties(): array
+    {
+        $reflectionClass = self::getReflectionClass();
+        return array_map(fn($property) => [
+            'name' => $property->getName(),
+            'type' => $property->getType()->getName(),
+        ], $reflectionClass->getProperties());
+    }
+
     /**
      * @return ReflectionClass
      */
-    protected static function getReflectionClass(): ReflectionClass
+    private static function getReflectionClass(): ReflectionClass
     {
         return new ReflectionClass(static::class);
     }
-
 }
