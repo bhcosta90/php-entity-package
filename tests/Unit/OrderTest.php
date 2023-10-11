@@ -1,7 +1,6 @@
 <?php
 
 use Costa\Entity\Data;
-use Costa\Entity\Exceptions\ValidationException;
 use Stubs\Customer;
 use Stubs\Order;
 
@@ -28,16 +27,18 @@ describe("Order Unit Test", function () {
     });
 
     test("Array entity", function () {
-        $customer = new Order(
-            customer: new Customer(name: 'testing'),
+        $order = new Order(
+            customer: $customer = new Customer(name: 'testing'),
             items: [],
         );
 
         assertEquals([
             'customer' => [
                 'name' => 'testing',
+                "id" => (string)$customer->id,
             ],
             'items' => [],
-        ], $customer->toArray());
+            "id" => (string)$order->id,
+        ], $order->toArray());
     });
 });
