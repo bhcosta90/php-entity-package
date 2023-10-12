@@ -2,13 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Costa\Entity\Traits;
+namespace Costa\Entity\Utils;
 
 use ReflectionClass;
 use ReflectionParameter;
 
-trait ParameterTrait
+final class ParameterUtil
 {
+    public function __construct(protected object $class)
+    {
+        //
+    }
+
     /**
      * @return ReflectionParameter[]
      */
@@ -33,6 +38,6 @@ trait ParameterTrait
      */
     protected function getReflectionClass(): ReflectionClass
     {
-        return new ReflectionClass($this);
+        return new ReflectionClass($this->class);
     }
 }
