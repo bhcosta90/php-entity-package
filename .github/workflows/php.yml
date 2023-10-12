@@ -19,4 +19,4 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Execute tests (Unit and Feature tests) via Pest
-      run: ./vendor/bin/pest --coverage --min=90
+      run: ./vendor/bin/pest --coverage --min=90 --parallel --processes=10
