@@ -8,14 +8,14 @@ use Stubs\Order;
 
 use function PHPUnit\Framework\assertInstanceOf;
 
-describe("Order Unit Test", function(){
-    test("create a entity order with from", function(){
-        $order = Order::from(
-            customer: [
-                'name' => 'bruno costa'
+describe("Order Unit Test", function () {
+    test("create a entity order with from", function () {
+        $order = Order::from([
+            'customer' => [
+                'name' => 'testing',
             ],
-            items: [],
-        );
+            'items' => [],
+        ]);
 
         assertInstanceOf(Data::class, $order);
         assertInstanceOf(Customer::class, $order->customer);
