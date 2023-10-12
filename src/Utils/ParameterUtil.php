@@ -9,7 +9,7 @@ use ReflectionParameter;
 
 final class ParameterUtil
 {
-    public function __construct(protected object $class)
+    public function __construct(protected object|string $class)
     {
         //
     }
@@ -22,7 +22,7 @@ final class ParameterUtil
         $reflectionClass = $this->getReflectionClass();
         $constructor = $reflectionClass->getConstructor();
         return array_map(fn($property) => [
-            'name' => $property->getName(),
+            'value' => $property->getName(),
             'type' => $property->getType()->getName(),
         ], $constructor->getParameters());
     }
@@ -31,7 +31,7 @@ final class ParameterUtil
     {
         $reflectionClass = $this->getReflectionClass();
         return array_map(fn($property) => [
-            'name' => $property->getName(),
+            'value' => $property->getName(),
             'type' => $property->getType()->getName(),
         ], $reflectionClass->getProperties());
     }

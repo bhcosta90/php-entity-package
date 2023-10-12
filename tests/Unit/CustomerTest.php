@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+use Costa\Entity\Data;
 use Costa\Entity\Exceptions\PropertyException;
 use Stubs\Customer;
 
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotNull;
 
 describe("Customer Unit Test", function () {
@@ -18,9 +20,26 @@ describe("Customer Unit Test", function () {
         assertNotNull($customer->updatedAt);
     });
 
-    test("exception when do not exist property", function(){
+    test("exception when do not exist property", function () {
         $customer = new Customer(name: 'testing');
-
         expect(fn() => $customer->email)->toThrow(PropertyException::class);
+    });
+
+    test("action from with setting parameter", function () {
+        $customer = Customer::from(
+            name: 'testing',
+            id: '5d0af754-68fd-11ee-8c99-0242ac120002'
+        );
+
+        assertInstanceOf(Data::class, $customer);
+    });
+
+    test("action from with array", function () {
+        $customer = Customer::from([
+            'name' => 'testing',
+            'id' => '5d0af754-68fd-11ee-8c99-0242ac120002',
+        ]);
+
+        assertInstanceOf(Data::class, $customer);
     });
 });
