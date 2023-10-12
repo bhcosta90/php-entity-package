@@ -15,7 +15,7 @@ class Uuid implements ValueObjectInterface
         $this->validate();
     }
 
-    protected function validate(): void
+    private function validate(): void
     {
         if (!UuidUuid::isValid($this->value)) {
             throw new InvalidArgumentException(
