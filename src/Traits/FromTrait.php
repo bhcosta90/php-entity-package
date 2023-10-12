@@ -23,7 +23,10 @@ trait FromTrait
         $entity = new static(...$payloadsConstructor);
 
         foreach ($payloads as $p => $v) {
-            if (empty($entity->{$p}) && $action = self::verifyExistAction($entity, $p, "set")) {
+            $newP = self::convertUcWords($p);
+
+            if ((empty($entity->{$p}) || empty($entity->{$newP}))
+                && $action = self::verifyExistAction($entity, $newP, "set")) {
                 $entity->$action($v);
             }
         }
