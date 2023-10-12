@@ -17,14 +17,17 @@ final class ParameterUtil
     /**
      * @return ReflectionParameter[]
      */
-    protected function getConstructorParameter(): array
+    public function getConstructorProperties(): array
     {
         $reflectionClass = $this->getReflectionClass();
         $constructor = $reflectionClass->getConstructor();
-        return $constructor->getParameters();
+        return array_map(fn($property) => [
+            'name' => $property->getName(),
+            'type' => $property->getType()->getName(),
+        ], $constructor->getParameters());
     }
 
-    protected function getProperties(): array
+    public function getProperties(): array
     {
         $reflectionClass = $this->getReflectionClass();
         return array_map(fn($property) => [
@@ -36,7 +39,7 @@ final class ParameterUtil
     /**
      * @return ReflectionClass
      */
-    protected function getReflectionClass(): ReflectionClass
+    public function getReflectionClass(): ReflectionClass
     {
         return new ReflectionClass($this->class);
     }
