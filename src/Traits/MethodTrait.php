@@ -16,4 +16,10 @@ trait MethodTrait
         return method_exists($class, $action = $action . ucwords($property))
         && property_exists($class, $property) && empty($class->{$property}) ? $action : null;
     }
+
+    protected static function convertString(string $property): string
+    {
+        $convertedString = preg_replace('/([a-z])([A-Z])/', '$1_$2', $property);
+        return str_replace('_', "", $convertedString);
+    }
 }
