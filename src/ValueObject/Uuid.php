@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid as UuidUuid;
 
 class Uuid implements ValueObjectInterface
 {
-    public function __construct(protected string $value)
+    public function __construct(protected mixed $value)
     {
         $this->validate();
     }
