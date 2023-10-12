@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Costa\Entity;
 
+use Costa\Entity\Interfaces\DataInterface;
 use Costa\Entity\Traits\FromTrait;
 use Costa\Entity\Traits\MethodMagicTrait;
 use Costa\Entity\ValueObject\Uuid;
@@ -11,7 +12,7 @@ use DateTime;
 use DateTimeInterface;
 use Exception;
 
-abstract class Data
+abstract class Data implements DataInterface
 {
     use MethodMagicTrait;
     use FromTrait;
