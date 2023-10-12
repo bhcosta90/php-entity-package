@@ -29,20 +29,21 @@ describe("Customer Unit Test", function () {
         $customer = Customer::from(
             name: 'testing',
             id: '5d0af754-68fd-11ee-8c99-0242ac120002',
-            createdAt: '2020-01-01',
-            updatedAt: '2020-01-01',
+            createdAt: '2020-01-01 00:00:00',
+            updatedAt: '2020-01-02 00:00:00',
         );
 
         assertInstanceOf(Data::class, $customer);
-        dump($customer);
+        assertEquals('testing', $customer->name);
+        assertEquals('5d0af754-68fd-11ee-8c99-0242ac120002', (string) $customer->id);
     });
 
     test("action from with array", function () {
         $customer = Customer::from([
             'name' => 'testing',
             'id' => '5d0af754-68fd-11ee-8c99-0242ac120002',
-            'createdAt' => '2020-01-01',
-            'updatedAt' => '2020-01-01',
+            'createdAt' => '2020-01-01 00:00:00',
+            'updatedAt' => '2020-01-02 00:00:00',
         ]);
 
         assertInstanceOf(Data::class, $customer);
