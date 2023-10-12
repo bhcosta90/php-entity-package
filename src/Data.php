@@ -22,22 +22,22 @@ abstract class Data
 
     protected DateTimeInterface $updatedAt;
 
-    protected function generateId(): Uuid
+    private function generateId(): Uuid
     {
         return Uuid::make();
     }
 
-    protected function generateCreatedAt(): DateTimeInterface
+    private function generateCreatedAt(): DateTimeInterface
     {
         return new DateTime();
     }
 
-    protected function generateUpdatedAt(): DateTimeInterface
+    private function generateUpdatedAt(): DateTimeInterface
     {
         return new DateTime();
     }
 
-    protected function setId(string $id): self
+    private function setId(string $id): self
     {
         $this->id = new Uuid($id);
         return $this;
@@ -46,7 +46,7 @@ abstract class Data
     /**
      * @throws Exception
      */
-    protected function setCreatedAt(string $date): self
+    private function setCreatedAt(string $date): self
     {
         $this->createdAt = new DateTime($date);
         return $this;
@@ -55,7 +55,7 @@ abstract class Data
     /**
      * @throws Exception
      */
-    protected function setUpdatedAt(string $date): self
+    private function setUpdatedAt(string $date): self
     {
         $this->updatedAt = new DateTime($date);
         return $this;
