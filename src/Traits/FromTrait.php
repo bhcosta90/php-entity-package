@@ -50,12 +50,7 @@ trait FromTrait
         return $entity;
     }
 
-    /**
-     * @param $type
-     * @param mixed $valuePayload
-     * @return mixed
-     */
-    public static function getPayloadWithDataInterface($type, mixed $valuePayload): DataInterface|null
+    public static function getPayloadWithDataInterface(string $type, mixed $valuePayload): DataInterface|null
     {
         try {
             $class = new ReflectionClass($type);
