@@ -20,6 +20,14 @@ trait FromTrait
         $valuesProperties = array_map(fn($p) => $p['value'], $parameter->getConstructorProperties());
         $payloads = array_intersect_key($payloads, array_flip($valuesProperties));
 
-        return new static(...$payloads);
+        $entity = new static(...$payloads);
+
+        foreach ($payloads as $p => $v) {
+            if (empty($entity->{$p})) {
+                dd($p);
+            }
+        }
+
+        return $entity;
     }
 }
