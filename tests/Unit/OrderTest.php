@@ -30,7 +30,7 @@ describe("Order Unit Test", function () {
                 'name' => 'testing',
             ],
             'items' => [
-                Item::from(name: 'testing'),
+                Item::from(name: 'testing 01'),
                 Item::from(name: 'testing 02'),
                 Item::from(name: 'testing 03'),
             ],
