@@ -4,54 +4,61 @@ declare(strict_types=1);
 
 namespace Costa\Entity;
 
-use Carbon\Carbon;
-use Costa\Entity\Contracts\DataInterface;
+use Costa\Entity\Interfaces\DataInterface;
 use Costa\Entity\Traits\FromTrait;
-use Costa\Entity\Traits\MethodMagicsTrait;
+use Costa\Entity\Traits\MethodMagicTrait;
 use Costa\Entity\ValueObject\Uuid;
+use DateTime;
+use DateTimeInterface;
+use Exception;
 
-abstract class Data
+abstract class Data implements DataInterface
 {
-    use MethodMagicsTrait;
+    use MethodMagicTrait;
     use FromTrait;
 
     protected readonly Uuid $id;
 
-    protected readonly Carbon $createdAt;
+    protected readonly DateTimeInterface $createdAt;
 
-    protected Carbon $updatedAt;
+    protected DateTimeInterface $updatedAt;
 
-    protected function generateId(): Uuid
+    private function generateId(): Uuid
     {
         return Uuid::make();
     }
 
-    protected function generateCreatedAt(): Carbon
+    private function generateCreatedAt(): DateTimeInterface
     {
-        return Carbon::now();
+        return new DateTime();
     }
 
-    protected function generateUpdatedAt(): Carbon
+    private function generateUpdatedAt(): DateTimeInterface
     {
-        return Carbon::now();
+        return new DateTime();
     }
 
-    protected function setId(string $id): self
+    private function setId(string $id): self
     {
         $this->id = new Uuid($id);
         return $this;
     }
 
-    protected function setCreatedAt(string $date): self
+    /**
+     * @throws Exception
+     */
+    private function setCreatedAt(string $date): self
     {
-        $this->createdAt = Carbon::now()->parse($date);
+        $this->createdAt = new DateTime($date);
         return $this;
     }
 
-    protected function setUpdatedAt(string $date): self
+    /**
+     * @throws Exception
+     */
+    private function setUpdatedAt(string $date): self
     {
-        $this->updatedAt = Carbon::now()->parse($date);
+        $this->updatedAt = new DateTime($date);
         return $this;
     }
-
 }

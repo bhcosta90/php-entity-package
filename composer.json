@@ -19,7 +19,6 @@
   "require": {
     "php": "^8.1",
     "ramsey/uuid": "^4.7",
-    "nesbot/carbon": "^2.71",
     "rakit/validation": "^1.4"
   },
   "require-dev": {

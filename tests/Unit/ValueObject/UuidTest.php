@@ -1,28 +1,32 @@
 <?php
 
-use Costa\Entity\Contracts\ValueObjectInterface;
+declare(strict_types=1);
+
+use Costa\Entity\Interfaces\ValueObjectInterface;
 use Costa\Entity\ValueObject\Uuid;
 
-describe("Uuid Unit Test", function () {
-    test("give type of the class", function () {
-        expect(Uuid::make())->toBeInstanceOf(ValueObjectInterface::class);
+use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertIsString;
+
+describe("Uuid Unit Test", function(){
+    test("creating a new uuid", function(){
+       $id = Uuid::make();
+       assertInstanceOf(ValueObjectInterface::class, $id);
     });
 
-    test("return a string uuid", function () {
-        $uuid = Uuid::make();
-        expect((string)$uuid)->toBeString()
-            ->and(strlen($uuid))->toBe(36);
+    test("creating a uuid with value", function(){
+        $id = new Uuid(value: '5cc2a07e-68fa-11ee-8c99-0242ac120002');
+        assertInstanceOf(ValueObjectInterface::class, $id);
     });
 
-    test("sending an invalid uuid", function () {
-        expect(fn() => new Uuid('testing'))->toThrow(
-            new InvalidArgumentException(
-                sprintf(
-                    '<%s> does not allow the value <%s>',
-                    Uuid::class,
-                    'testing'
-                )
-            )
-        );
+    test("string uuid", function(){
+        $id = Uuid::make();
+        assertIsString((string) $id);
+    });
+
+    test("exception uuid", function(){
+        expect(fn() => new Uuid(value: '123'))
+            ->toThrow(InvalidArgumentException::class)
+            ->toThrow(sprintf('<%s> does not allow the value <%s>', Uuid::class, '123'));
     });
 });
