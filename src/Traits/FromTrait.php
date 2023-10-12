@@ -59,8 +59,7 @@ trait FromTrait
                 return $classData::from(...$valuePayload);
             }
         } catch (Throwable) {
+            return null;
         }
-
-        return null;
     }
 }
