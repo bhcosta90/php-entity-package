@@ -14,4 +14,5 @@ test("Address Unit Test", function(){
     ]);
 
     assertInstanceOf(ValueObjectInterface::class, $address->state);
+    assertInstanceOf(DateTimeInterface::class, $address->stateCreatedAt);
 });
