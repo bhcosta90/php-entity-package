@@ -20,12 +20,6 @@ trait FromTrait
         }
 
         $parameter = new ParameterUtil(static::class);
-//        $valuesProperties = array_map(fn($p) => $p['value'], $parameter->getConstructorProperties());
-//        $payloadsConstructor = array_intersect_key($payloads, array_flip($valuesProperties));
-//
-//        foreach($payloadsConstructor as $key => $value) {
-//            dd($payloadsConstructor);
-//        }
 
         $payloadsConstructor = [];
         foreach ($parameter->getConstructorProperties() as $property) {
@@ -33,7 +27,8 @@ trait FromTrait
             $type = $property['type'];
 
             $payloadsConstructor[$value] = self::getPayloadWithDataInterface($type, $payloads[$value])
-                ?: $payloads[$value];
+                ?: self::getPayloadWithEnum($type, $value, $payloads[$value])
+                    ?: $payloads[$value];
         }
 
         $entity = new static(...$payloadsConstructor);
@@ -58,6 +53,22 @@ trait FromTrait
                 $classData = "\\" . $class->getName();
                 return $classData::from(...$valuePayload);
             }
+        } catch (Throwable) {
+            return null;
+        }
+        return null;
+    }
+
+    /**
+     * @param string $type
+     * @param string $property
+     * @param mixed $valuePayload
+     * @return null
+     */
+    private static function getPayloadWithEnum(string $type, string $property, mixed $valuePayload)
+    {
+        try {
+            return $type::from($valuePayload);
         } catch (Throwable) {
             return null;
         }

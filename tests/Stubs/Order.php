@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace Stubs;
 
 use Costa\Entity\Data;
+use Stubs\Enum\Status;
 
 class Order extends Data
 {
     public function __construct(
-        public Customer $customer,
+        protected Customer $customer,
 
         /** @var Item[] */
-        public array $items,
+        protected array $items,
+
+        protected Status $status,
     ) {
         //
     }
