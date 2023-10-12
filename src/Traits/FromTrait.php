@@ -18,13 +18,13 @@ trait FromTrait
 
         $parameter = new ParameterUtil(static::class);
         $valuesProperties = array_map(fn($p) => $p['value'], $parameter->getConstructorProperties());
-        $payloads = array_intersect_key($payloads, array_flip($valuesProperties));
+        $payloadsConstructor = array_intersect_key($payloads, array_flip($valuesProperties));
 
-        $entity = new static(...$payloads);
+        $entity = new static(...$payloadsConstructor);
 
         foreach ($payloads as $p => $v) {
-            if (empty($entity->{$p})) {
-                dd($p);
+            if (empty($entity->{$p}) && $action = self::verifyExistAction($entity, $p, "set")) {
+                $entity->$action($v);
             }
         }
 

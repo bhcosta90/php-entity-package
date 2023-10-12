@@ -6,9 +6,9 @@ namespace Costa\Entity\Traits;
 
 trait MethodTrait
 {
-    protected function verifyExistAction($property, $action): ?string
+    protected static function verifyExistAction($class, $property, $action): ?string
     {
-        return method_exists($this, $action = $action . ucwords($property))
-        && property_exists($this, $property) && empty($this->{$property}) ? $action : null;
+        return method_exists($class, $action = $action . ucwords($property))
+        && property_exists($class, $property) && empty($class->{$property}) ? $action : null;
     }
 }
