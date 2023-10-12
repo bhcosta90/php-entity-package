@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Costa\Entity\Traits;
 
-use Costa\Entity\Data;
 use Costa\Entity\Interfaces\DataInterface;
 use Costa\Entity\Utils\ParameterUtil;
 use ReflectionClass;
@@ -30,16 +29,11 @@ trait FromTrait
 
         $payloadsConstructor = [];
         foreach ($parameter->getConstructorProperties() as $property) {
-            $payloadsConstructor[$property['value']] = $payloads[$property['value']];
+            $value = $property['value'];
+            $type = $property['type'];
 
-            try {
-                $class = new ReflectionClass($property['type']);
-                if (in_array(DataInterface::class, array_keys($class->getInterfaces()))) {
-                    $classData = "\\" . $class->getName();
-                    $payloadsConstructor[$property['value']] = $classData::from(...$payloads[$property['value']]);
-                }
-            } catch (Throwable) {
-            }
+            $payloadsConstructor[$value] = self::getPayloadWithDataInterface($type, $payloads[$value])
+                ?: $payloads[$value];
         }
 
         $entity = new static(...$payloadsConstructor);
@@ -54,5 +48,24 @@ trait FromTrait
         }
 
         return $entity;
+    }
+
+    /**
+     * @param $type
+     * @param mixed $valuePayload
+     * @return mixed
+     */
+    public static function getPayloadWithDataInterface($type, mixed $valuePayload): DataInterface|null
+    {
+        try {
+            $class = new ReflectionClass($type);
+            if (in_array(DataInterface::class, array_keys($class->getInterfaces()))) {
+                $classData = "\\" . $class->getName();
+                return $classData::from(...$valuePayload);
+            }
+        } catch (Throwable) {
+        }
+
+        return null;
     }
 }
