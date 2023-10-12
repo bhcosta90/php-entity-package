@@ -14,7 +14,7 @@ describe("ParameterUtil Unit Test", function () {
     test("get constructor parameters", function () {
         assertEquals([
             [
-                "name" => "name",
+                "value" => "name",
                 "type" => "string",
             ],
         ], $this->parameter->getConstructorProperties());
@@ -23,19 +23,19 @@ describe("ParameterUtil Unit Test", function () {
     test("get all parameters", function () {
         assertEquals([
             [
-                "name" => "name",
+                "value" => "name",
                 "type" => "string",
             ],
             [
-                "name" => "id",
+                "value" => "id",
                 "type" => Uuid::class,
             ],
             [
-                "name" => "createdAt",
+                "value" => "createdAt",
                 "type" => DateTimeInterface::class,
             ],
             [
-                "name" => "updatedAt",
+                "value" => "updatedAt",
                 "type" => DateTimeInterface::class,
             ],
         ], $this->parameter->getProperties());

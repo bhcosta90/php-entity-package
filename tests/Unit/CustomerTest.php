@@ -36,6 +36,8 @@ describe("Customer Unit Test", function () {
         assertInstanceOf(Data::class, $customer);
         assertEquals('testing', $customer->name);
         assertEquals('5d0af754-68fd-11ee-8c99-0242ac120002', (string) $customer->id);
+        assertEquals('2020-01-01 00:00:00', $customer->createdAt->format('Y-m-d H:i:s'));
+        assertEquals('2020-01-02 00:00:00', $customer->updatedAt->format('Y-m-d H:i:s'));
     });
 
     test("action from with array", function () {
@@ -47,5 +49,9 @@ describe("Customer Unit Test", function () {
         ]);
 
         assertInstanceOf(Data::class, $customer);
+        assertEquals('testing', $customer->name);
+        assertEquals('5d0af754-68fd-11ee-8c99-0242ac120002', (string) $customer->id);
+        assertEquals('2020-01-01 00:00:00', $customer->createdAt->format('Y-m-d H:i:s'));
+        assertEquals('2020-01-02 00:00:00', $customer->updatedAt->format('Y-m-d H:i:s'));
     });
 });

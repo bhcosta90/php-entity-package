@@ -15,7 +15,7 @@ trait MethodMagicTrait
      */
     public function __get($property)
     {
-        if ($action = $this->verifyExistAction(static::class, $property, "generate")) {
+        if (($action = $this->verifyExistAction($this, $property, "generate")) && empty($this->{$property})) {
             $this->{$property} = $this->$action();
         }
 
