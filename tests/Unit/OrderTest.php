@@ -13,11 +13,9 @@ use function PHPUnit\Framework\assertInstanceOf;
 describe("Order Unit Test", function () {
     test("create a entity order with from", function () {
         $order = Order::from([
-            'customer' => [
-                'name' => 'testing',
-            ],
+            'customer' => Customer::from(name: 'testing'),
             'items' => [],
-            'status' => 'pending',
+            'status' => Status::PENDING,
         ]);
 
         assertInstanceOf(Data::class, $order);
@@ -26,9 +24,7 @@ describe("Order Unit Test", function () {
 
     test("create a entity order with from and items", function () {
         $order = Order::from([
-            'customer' => [
-                'name' => 'testing',
-            ],
+            'customer' => Customer::from(name: 'testing'),
             'items' => [
                 Item::from(name: 'testing 01'),
                 Item::from(name: 'testing 02'),
