@@ -14,5 +14,6 @@ class Address extends Data
         protected Uuid $state,
         protected DateTime $stateCreatedAt,
     ) {
+        parent::__construct();
     }
 }

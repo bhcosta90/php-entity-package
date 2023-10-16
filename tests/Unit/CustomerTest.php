@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Costa\Entity\Data;
+use Costa\Entity\Exceptions\NotificationException;
 use Costa\Entity\Exceptions\PropertyException;
 use Stubs\Customer;
 
@@ -23,6 +24,10 @@ describe("Customer Unit Test", function () {
     test("exception when do not exist property", function () {
         $customer = new Customer(name: 'testing');
         expect(fn() => $customer->email)->toThrow(PropertyException::class);
+    });
+
+    test("exception when name is invalid", function () {
+        expect(fn() => new Customer(name: 't'))->toThrow(NotificationException::class);
     });
 
     test("action from with setting parameter", function () {

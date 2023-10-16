@@ -17,6 +17,6 @@ class Order extends Data
 
         protected Status $status,
     ) {
-        //
+        parent::__construct();
     }
 }

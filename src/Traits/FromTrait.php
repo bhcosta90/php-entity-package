@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Costa\Entity\Traits;
 
+use Costa\Entity\Exceptions\NotificationException;
 use Costa\Entity\Interfaces\ValueObjectInterface;
 use Costa\Entity\Utils\ParameterUtil;
 use DateTime;
@@ -16,7 +17,11 @@ use Throwable;
 trait FromTrait
 {
     use MethodTrait;
+    use ValidateTrait;
 
+    /**
+     * @throws NotificationException
+     */
     public static function from(mixed ...$payloads): static
     {
         if (!empty($payloads[0])) {
@@ -49,6 +54,8 @@ trait FromTrait
                 $entity->$action($v);
             }
         }
+
+        $entity->validated();
 
         return $entity;
     }

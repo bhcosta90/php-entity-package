@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Costa\Entity;
 
 use Costa\Entity\Interfaces\DataInterface;
+use Costa\Entity\Support\NotificationSupport;
 use Costa\Entity\Traits\FromTrait;
 use Costa\Entity\Traits\MethodMagicTrait;
+use Costa\Entity\Traits\ValidateTrait;
 use Costa\Entity\ValueObject\Uuid;
 use DateTime;
 use DateTimeInterface;
@@ -16,6 +18,14 @@ abstract class Data implements DataInterface
 {
     use MethodMagicTrait;
     use FromTrait;
+    use ValidateTrait;
+
+    private NotificationSupport $notification;
+
+    public function __construct()
+    {
+        $this->notification = new NotificationSupport();
+    }
 
     protected readonly Uuid $id;
 
