@@ -9,16 +9,7 @@ use Costa\Entity\Exceptions\NotificationException;
 
 class Customer extends Data
 {
-    /**
-     * @throws NotificationException
-     */
-    public function __construct(
-        protected string $name,
-    ) {
-        parent::__construct();
-        $this->validated();
-    }
-
+    protected string $name;
 
     protected function rules(): array
     {

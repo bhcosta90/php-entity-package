@@ -15,7 +15,7 @@ trait ValidateTrait
     /**
      * @throws NotificationException
      */
-    public function validated(): void
+    protected function validated(): void
     {
         $parameter = new ParameterUtil(static::class);
         $data = [];

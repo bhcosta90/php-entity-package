@@ -10,10 +10,12 @@ use DateTime;
 
 class Address extends Data
 {
-    public function __construct(
-        protected Uuid $state,
-        protected DateTime $stateCreatedAt,
-    ) {
+    protected Uuid $state;
+
+    protected DateTime $stateCreatedAt;
+
+    public function __construct()
+    {
         parent::__construct();
     }
 }

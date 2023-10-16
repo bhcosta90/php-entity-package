@@ -8,9 +8,5 @@ use Costa\Entity\Data;
 
 class Item extends Data
 {
-    public function __construct(
-        protected string $name,
-    ) {
-        parent::__construct();
-    }
+    protected string $name;
 }

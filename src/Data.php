@@ -22,7 +22,7 @@ abstract class Data implements DataInterface
 
     private NotificationSupport $notification;
 
-    public function __construct()
+    protected function __construct()
     {
         $this->notification = new NotificationSupport();
     }

@@ -9,14 +9,11 @@ use Stubs\Enum\Status;
 
 class Order extends Data
 {
-    public function __construct(
-        protected Customer $customer,
 
-        /** @var Item[] */
-        protected array $items,
+    protected Customer $customer;
 
-        protected Status $status,
-    ) {
-        parent::__construct();
-    }
+    /** @var Item[] */
+    protected array $items;
+
+    protected Status $status;
 }

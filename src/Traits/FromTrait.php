@@ -4,25 +4,40 @@ declare(strict_types=1);
 
 namespace Costa\Entity\Traits;
 
-use Costa\Entity\Exceptions\NotificationException;
-use Costa\Entity\Interfaces\ValueObjectInterface;
 use Costa\Entity\Utils\ParameterUtil;
-use DateTime;
-use DateTimeInterface;
-use Exception;
-use ReflectionClass;
-use ReflectionException;
-use Throwable;
 
 trait FromTrait
 {
     use MethodTrait;
-    use ValidateTrait;
 
-    /**
-     * @throws NotificationException
-     */
     public static function from(mixed ...$payloads): static
+    {
+        if (!empty($payloads[0])) {
+            $payloads = $payloads[0];
+        }
+
+        $obj = new static();
+
+        foreach ($payloads as $k => $payload) {
+            $k = self::convertUcWords($k);
+            $obj->{$k} = $payload;
+        }
+
+        $parameter = new ParameterUtil(static::class);
+
+        foreach ($parameter->getProperties() as $properties) {
+            $property = self::convertUcWords($properties['value']);
+            if (empty($obj->{$property}) && ($action = self::verifyExistAction($obj, $property, "generate"))) {
+                $obj->{$property} = $obj->$action();
+            }
+        }
+
+        $obj->validated();
+
+        return $obj;
+    }
+
+    public static function fromOld(mixed ...$payloads): static
     {
         if (!empty($payloads[0])) {
             $payloads = $payloads[0];
@@ -54,8 +69,6 @@ trait FromTrait
                 $entity->$action($v);
             }
         }
-
-        $entity->validated();
 
         return $entity;
     }
