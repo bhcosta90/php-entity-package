@@ -22,10 +22,7 @@ trait ValidateTrait
 
         foreach ($parameter->getProperties() as $property) {
             $prop = $property['value'];
-            try {
-                $data[$property['value']] = $this->{$prop};
-            } catch (Throwable) {
-            }
+            $data[$property['value']] = $this->{$prop};
         }
 
         if ($errors = ValidatorFactory::make($data, $this->rules())) {

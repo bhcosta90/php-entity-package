@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 use Costa\Entity\Utils\ParameterUtil;
 use Costa\Entity\ValueObject\Uuid;
-use Stubs\Customer;
+
+use Stubs\PropertyWithConstructor;
 
 use function PHPUnit\Framework\assertEquals;
 
 describe("ParameterUtil Unit Test", function () {
-    beforeEach(fn() => $this->parameter = new ParameterUtil(new Customer(name: 'testing')));
+    beforeEach(fn() => $this->parameter = new ParameterUtil(PropertyWithConstructor::class));
 
     test("get constructor parameters", function () {
         assertEquals([
@@ -23,10 +24,6 @@ describe("ParameterUtil Unit Test", function () {
     test("get all parameters", function () {
         assertEquals([
             [
-                "value" => "name",
-                "type" => "string",
-            ],
-            [
                 "value" => "id",
                 "type" => Uuid::class,
             ],
@@ -37,6 +34,10 @@ describe("ParameterUtil Unit Test", function () {
             [
                 "value" => "updatedAt",
                 "type" => DateTimeInterface::class,
+            ],
+            [
+                "value" => "name",
+                "type" => "string",
             ],
         ], $this->parameter->getProperties());
     });

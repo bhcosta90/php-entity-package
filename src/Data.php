@@ -47,28 +47,4 @@ abstract class Data implements DataInterface
     {
         return new DateTime();
     }
-
-    private function setId(string $id): self
-    {
-        $this->id = new Uuid($id);
-        return $this;
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function setCreatedAt(string $date): self
-    {
-        $this->createdAt = new DateTime($date);
-        return $this;
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function setUpdatedAt(string $date): self
-    {
-        $this->updatedAt = new DateTime($date);
-        return $this;
-    }
 }
