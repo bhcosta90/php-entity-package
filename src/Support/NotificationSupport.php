@@ -27,10 +27,10 @@ class NotificationSupport
 
         foreach ($this->{$property} as $error) {
             if ($context === '' || $error['context'] == $context) {
-                $messages .= "{$error['context']}: {$error['message']},";
+                $messages .= "{$error['context']}: {$error['message']}, ";
             }
         }
 
-        return $messages;
+        return substr($messages, 0, -2);
     }
 }
