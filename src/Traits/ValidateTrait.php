@@ -16,20 +16,6 @@ trait ValidateTrait
 
     protected abstract function rules(): array;
 
-    /**
-     * @throws NotificationException
-     */
-    protected function validated(): void
-    {
-        $data = $this->toArray();
-
-        if ($errors = ValidatorFactory::make($data, $this->rules())) {
-            array_map(fn($error) => $this->notification()->push(static::class, $error), $errors);
-        }
-
-        if ($this->notification()->has()) {
-            throw new NotificationException($this->notification()->messages());
-        }
-    }
+    protected abstract function validated(): void;
 
 }
