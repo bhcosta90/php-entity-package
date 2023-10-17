@@ -36,9 +36,7 @@ abstract class Data implements DataInterface
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
 
-        if (method_exists($this, 'validated')) {
-            $this->validated();
-        }
+        $this->validated();
     }
 
     public function id(): string
@@ -75,9 +73,7 @@ abstract class Data implements DataInterface
             }
         }
 
-        if (method_exists($obj, 'validated')) {
-            $obj->validated();
-        }
+        $obj->validated();
 
         return $obj;
     }
@@ -110,6 +106,10 @@ abstract class Data implements DataInterface
                     }
                 }
                 $valueProperty = $newDataValue;
+            }
+
+            if ($valueProperty instanceof DataInterface) {
+                $valueProperty = $valueProperty->toArray();
             }
 
             $response[$property['value']] = $valueProperty;

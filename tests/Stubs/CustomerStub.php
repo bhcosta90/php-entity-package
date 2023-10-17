@@ -12,6 +12,7 @@ class CustomerStub extends Data
 {
     public function __construct(
         protected string $name,
+        protected ?BusinessStub $business = null,
         /**
          * @var AddressStub[]
          */
