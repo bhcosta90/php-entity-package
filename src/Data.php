@@ -112,6 +112,10 @@ abstract class Data implements DataInterface
                 $valueProperty = $newDataValue;
             }
 
+            if ($valueProperty instanceof DataInterface) {
+                $valueProperty = $valueProperty->toArray();
+            }
+
             $response[$property['value']] = $valueProperty;
         }
 

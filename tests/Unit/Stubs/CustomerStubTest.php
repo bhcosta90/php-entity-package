@@ -7,6 +7,7 @@ use Costa\Entity\Exceptions\NotificationException;
 use Costa\Entity\Exceptions\PropertyException;
 use Costa\Entity\ValueObject\Uuid;
 use Tests\Stubs\AddressStub;
+use Tests\Stubs\BusinessStub;
 use Tests\Stubs\CustomerStub;
 
 use function PHPUnit\Framework\assertEquals;
@@ -41,6 +42,7 @@ describe("CustomerStub Unit Test", function () {
 
         assertEquals([
             'id' => (string)$id,
+            'business' => null,
             'createdAt' => $createdAt->format('Y-m-d H:i:s'),
             'name' => (string)'testing',
             'updatedAt' => $updatedAt->format('Y-m-d H:i:s'),
@@ -64,6 +66,7 @@ describe("CustomerStub Unit Test", function () {
 
         assertEquals([
             'id' => (string)$id,
+            'business' => null,
             'createdAt' => $createdAt->format('Y-m-d H:i:s'),
             'name' => (string)'testing',
             'updatedAt' => $updatedAt->format('Y-m-d H:i:s'),
@@ -87,10 +90,33 @@ describe("CustomerStub Unit Test", function () {
 
         assertEquals([
             'id' => (string)$id,
+            'business' => null,
             'createdAt' => $createdAt->format('Y-m-d H:i:s'),
             'name' => (string)'testing',
             'updatedAt' => $updatedAt->format('Y-m-d H:i:s'),
             'orders' => [(string)$order01, (string)$order02, (string)$order03],
+            'address' => [],
+        ], $customer->toArray());
+    });
+
+    it("Creating a customer and return toArray with business", function () {
+        $business = new BusinessStub(name: 'testing');
+
+        $customer = CustomerStub::make(
+            name: 'testing',
+            id: $id = Uuid::make(),
+            createdAt: $createdAt = new DateTime('2020-01-01 00:00:00'),
+            updatedAt: $updatedAt = new DateTime('2020-01-02 00:00:00'),
+            business: $business
+        );
+
+        assertEquals([
+            'id' => (string)$id,
+            'business' => $business->toArray(),
+            'createdAt' => $createdAt->format('Y-m-d H:i:s'),
+            'name' => (string)'testing',
+            'updatedAt' => $updatedAt->format('Y-m-d H:i:s'),
+            'orders' => [],
             'address' => [],
         ], $customer->toArray());
     });
