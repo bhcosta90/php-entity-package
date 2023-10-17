@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Costa\Entity\Contracts\DataInterface;
 use Costa\Entity\Exceptions\NotificationException;
+use Costa\Entity\Exceptions\PropertyException;
 use Costa\Entity\ValueObject\Uuid;
 use Tests\Stubs\AddressStub;
 use Tests\Stubs\CustomerStub;
@@ -101,5 +102,10 @@ describe("CustomerStub Unit Test", function () {
     it("Creating a customer and get name", function () {
         $customer = new CustomerStub(name: 'testing');
         assertEquals($customer->name, 'testing');
+    });
+
+    it("Exception when get a property that do not exist", function () {
+        $customer = new CustomerStub(name: 'testing');
+        expect(fn() => $customer->email)->toThrow(PropertyException::class);
     });
 });
