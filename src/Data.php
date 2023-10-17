@@ -84,6 +84,8 @@ abstract class Data implements DataInterface
 
         $response = [];
         foreach ($parameters->getProperties() as $property) {
+            $key = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $property['value']));
+
             $valueProperty = $this->{$property['value']};
 
             if ($valueProperty instanceof DateTimeInterface) {
@@ -112,7 +114,7 @@ abstract class Data implements DataInterface
                 $valueProperty = $valueProperty->toArray();
             }
 
-            $response[$property['value']] = $valueProperty;
+            $response[$key] = $valueProperty;
         }
 
         return $response;

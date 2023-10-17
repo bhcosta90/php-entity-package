@@ -43,9 +43,9 @@ describe("CustomerStub Unit Test", function () {
         assertEquals([
             'id' => (string)$id,
             'business' => null,
-            'createdAt' => $createdAt->format('Y-m-d H:i:s'),
+            'created_at' => $createdAt->format('Y-m-d H:i:s'),
             'name' => (string)'testing',
-            'updatedAt' => $updatedAt->format('Y-m-d H:i:s'),
+            'updated_at' => $updatedAt->format('Y-m-d H:i:s'),
             'address' => [],
             'orders' => [],
         ], $customer->toArray());
@@ -67,9 +67,9 @@ describe("CustomerStub Unit Test", function () {
         assertEquals([
             'id' => (string)$id,
             'business' => null,
-            'createdAt' => $createdAt->format('Y-m-d H:i:s'),
+            'created_at' => $createdAt->format('Y-m-d H:i:s'),
             'name' => (string)'testing',
-            'updatedAt' => $updatedAt->format('Y-m-d H:i:s'),
+            'updated_at' => $updatedAt->format('Y-m-d H:i:s'),
             'address' => [$address01->toArray(), $address02->toArray(), $address03->toArray()],
             'orders' => [],
         ], $customer->toArray());
@@ -91,9 +91,9 @@ describe("CustomerStub Unit Test", function () {
         assertEquals([
             'id' => (string)$id,
             'business' => null,
-            'createdAt' => $createdAt->format('Y-m-d H:i:s'),
+            'created_at' => $createdAt->format('Y-m-d H:i:s'),
             'name' => (string)'testing',
-            'updatedAt' => $updatedAt->format('Y-m-d H:i:s'),
+            'updated_at' => $updatedAt->format('Y-m-d H:i:s'),
             'orders' => [(string)$order01, (string)$order02, (string)$order03],
             'address' => [],
         ], $customer->toArray());
@@ -113,9 +113,9 @@ describe("CustomerStub Unit Test", function () {
         assertEquals([
             'id' => (string)$id,
             'business' => $business->toArray(),
-            'createdAt' => $createdAt->format('Y-m-d H:i:s'),
+            'created_at' => $createdAt->format('Y-m-d H:i:s'),
             'name' => (string)'testing',
-            'updatedAt' => $updatedAt->format('Y-m-d H:i:s'),
+            'updated_at' => $updatedAt->format('Y-m-d H:i:s'),
             'orders' => [],
             'address' => [],
         ], $customer->toArray());
