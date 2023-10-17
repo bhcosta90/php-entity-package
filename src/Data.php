@@ -6,6 +6,8 @@ namespace Costa\Entity;
 
 use Costa\Entity\Contracts\DataInterface;
 use Costa\Entity\Contracts\ValueObjectInterface;
+use Costa\Entity\Exceptions\NotificationException;
+use Costa\Entity\Factory\ValidatorFactory;
 use Costa\Entity\Support\NotificationSupport;
 use Costa\Entity\Support\ParameterSupport;
 use Costa\Entity\Traits\MethodMagicTrait;
@@ -124,5 +126,21 @@ abstract class Data implements DataInterface
     protected function notification(): NotificationSupport
     {
         return $this->notification;
+    }
+
+    /**
+     * @throws NotificationException
+     */
+    protected function validated(): void
+    {
+        $data = $this->toArray();
+
+        if ($errors = ValidatorFactory::make($data, $this->rules())) {
+            array_map(fn($error) => $this->notification()->push(static::class, $error), $errors);
+        }
+
+        if ($this->notification()->has()) {
+            throw new NotificationException($this->notification()->messages());
+        }
     }
 }
