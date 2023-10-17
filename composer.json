@@ -1,5 +1,7 @@
 {
   "name": "bhcosta90/entity",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "Costa\\Entity\\": "src/"
