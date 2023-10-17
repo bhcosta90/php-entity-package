@@ -1,5 +1,7 @@
 {
   "name": "bhcosta90/entity",
+  "type": "project",
+  "license": "MIT",
   "minimum-stability": "stable",
   "prefer-stable": true,
   "autoload": {
