@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Costa\Entity\ValueObject;
 
-use Costa\Entity\Interfaces\ValueObjectInterface;
+use Costa\Entity\Contracts\ValueObjectInterface;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as UuidUuid;
 
 class Uuid implements ValueObjectInterface
 {
-    public function __construct(protected string $value)
+    public function __construct(protected mixed $value)
     {
         $this->validate();
     }
 
-    protected function validate(): void
+    private function validate(): void
     {
         if (!UuidUuid::isValid($this->value)) {
             throw new InvalidArgumentException(

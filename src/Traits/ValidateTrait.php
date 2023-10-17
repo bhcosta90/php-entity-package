@@ -4,35 +4,32 @@ declare(strict_types=1);
 
 namespace Costa\Entity\Traits;
 
-use Costa\Entity\Exceptions\ValidationException;
-use Costa\Entity\Validator\RakitValidation;
+use Costa\Entity\Exceptions\NotificationException;
+use Costa\Entity\Factory\ValidatorFactory;
+use Costa\Entity\Support\NotificationSupport;
 
 trait ValidateTrait
 {
-    use NotificationTrait;
+    public abstract function toArray();
+
+    protected abstract function notification(): NotificationSupport;
+
+    protected abstract function rules(): array;
 
     /**
-     * @throws ValidationException
+     * @throws NotificationException
      */
-    public function validate(?array $data = null): bool
+    protected function validated(): void
     {
-        if ($data === null) {
-            $data = $this->toArray();
+        $data = $this->toArray();
+
+        if ($errors = ValidatorFactory::make($data, $this->rules())) {
+            array_map(fn($error) => $this->notification()->push(static::class, $error), $errors);
         }
 
-        $response = RakitValidation::validate($data, $this->rules());
-
-        foreach ($response as $error) {
-            $this->addError(static::class, $error);
+        if ($this->notification()->has()) {
+            throw new NotificationException($this->notification()->messages());
         }
-
-        return !count($response);
     }
 
-    protected abstract function toArray(): array;
-
-    protected function rules(): array
-    {
-        return [];
-    }
 }

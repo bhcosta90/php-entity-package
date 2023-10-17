@@ -7,7 +7,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Stubs\\": "tests/Stubs"
+      "Tests\\": "tests"
     }
   },
   "authors": [
