@@ -1,6 +1,7 @@
 {
   "name": "bhcosta90/entity",
-  "license": "MIT",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "Costa\\Entity\\": "src/"
