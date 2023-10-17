@@ -14,12 +14,12 @@ use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
 
 describe("CustomerStub Unit Test", function () {
-    it("Creating a new customer", function () {
+    test("Creating a new customer", function () {
         $customer = new CustomerStub(name: 'testing');
         assertInstanceOf(DataInterface::class, $customer);
     });
 
-    it("Creating a customer with data", function () {
+    test("Creating a customer with data", function () {
         $customer = CustomerStub::make(
             name: 'testing',
             id: $id = Uuid::make(),
@@ -32,7 +32,7 @@ describe("CustomerStub Unit Test", function () {
         assertEquals($customer->updatedAt(), $updatedAt->format('Y-m-d H:i:s'));
     });
 
-    it("Creating a customer and return toArray without address and order", function () {
+    test("Creating a customer and return toArray without address and order", function () {
         $customer = CustomerStub::make(
             name: 'testing',
             id: $id = Uuid::make(),
@@ -51,7 +51,7 @@ describe("CustomerStub Unit Test", function () {
         ], $customer->toArray());
     });
 
-    it("Creating a customer and return toArray with addresses", function () {
+    test("Creating a customer and return toArray with addresses", function () {
         $address01 = new AddressStub(name: 'testing');
         $address02 = new AddressStub(name: 'testing');
         $address03 = new AddressStub(name: 'testing');
@@ -75,7 +75,7 @@ describe("CustomerStub Unit Test", function () {
         ], $customer->toArray());
     });
 
-    it("Creating a customer and return toArray with orders", function () {
+    test("Creating a customer and return toArray with orders", function () {
         $order01 = Uuid::make();
         $order02 = Uuid::make();
         $order03 = Uuid::make();
@@ -99,7 +99,7 @@ describe("CustomerStub Unit Test", function () {
         ], $customer->toArray());
     });
 
-    it("Creating a customer and return toArray with business", function () {
+    test("Creating a customer and return toArray with business", function () {
         $business = new BusinessStub(name: 'testing');
 
         $customer = CustomerStub::make(
@@ -121,16 +121,16 @@ describe("CustomerStub Unit Test", function () {
         ], $customer->toArray());
     });
 
-    it("Exception name of customer", fn() => expect(fn() => new CustomerStub(name: 'a'))
+    test("Exception name of customer", fn() => expect(fn() => new CustomerStub(name: 'a'))
         ->toThrow(NotificationException::class)
     );
 
-    it("Creating a customer and get name", function () {
+    test("Creating a customer and get name", function () {
         $customer = new CustomerStub(name: 'testing');
         assertEquals($customer->name, 'testing');
     });
 
-    it("Exception when get a property that do not exist", function () {
+    test("Exception when get a property that do not exist", function () {
         $customer = new CustomerStub(name: 'testing');
         expect(fn() => $customer->email)->toThrow(PropertyException::class);
     });
