@@ -56,7 +56,9 @@ abstract class Data implements DataInterface
 
     public static function make(mixed ...$payloads): static
     {
-        dd($payloads);
+        if (!empty($payloads[0])) {
+            $payloads = $payloads[0];
+        }
 
         $parameters = new ParameterSupport(static::class);
 
@@ -67,7 +69,6 @@ abstract class Data implements DataInterface
             $name = $property['value'];
             $type = $property['type'];
 
-            dump($name);
             if (in_array($name, array_keys($payloads))) {
                 $value = $payloads[$name];
             }
@@ -83,7 +84,7 @@ abstract class Data implements DataInterface
         }
 
         foreach ($payloads as $key => $payload) {
-            if (in_array($key, ['id', 'updatedAt', 'createdAt'])) {
+            if (in_array($key, ['id', 'updatedAt', 'createdAt']) && !empty($payload)) {
                 $obj->{$key} = self::transformValueInTypePropery($properties[$key], $payload);
             }
         }
