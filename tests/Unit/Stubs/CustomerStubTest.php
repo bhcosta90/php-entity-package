@@ -32,6 +32,19 @@ describe("CustomerStub Unit Test", function () {
         assertEquals($customer->updatedAt(), $updatedAt->format('Y-m-d H:i:s'));
     });
 
+    test("Creating a customer with array data", function(){
+        $customer = CustomerStub::make([
+            "name" =>'testing',
+            "id" => (string) $id = Uuid::make(),
+            "createdAt" =>$createdAt = new DateTime('2020-01-01 00:00:00'),
+            "updatedAt" =>$updatedAt = new DateTime('2020-01-02 00:00:00'),
+        ]);
+        assertInstanceOf(DataInterface::class, $customer);
+        assertEquals($customer->id(), $id);
+        assertEquals($customer->createdAt(), $createdAt->format('Y-m-d H:i:s'));
+        assertEquals($customer->updatedAt(), $updatedAt->format('Y-m-d H:i:s'));
+    });
+
     test("Creating a customer and return toArray without address and order", function () {
         $customer = CustomerStub::make(
             name: 'testing',

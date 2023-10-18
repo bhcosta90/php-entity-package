@@ -71,9 +71,8 @@ abstract class Data implements DataInterface
 
             if (in_array($name, array_keys($payloads))) {
                 $value = $payloads[$name];
+                $dataConstructor[$name] = self::transformValueInTypePropery($type, $value);
             }
-
-            $dataConstructor[$name] = self::transformValueInTypePropery($type, $value);
         }
 
         $obj = new static(...$dataConstructor);
