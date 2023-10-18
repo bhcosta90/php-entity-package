@@ -56,20 +56,36 @@ abstract class Data implements DataInterface
 
     public static function make(mixed ...$payloads): static
     {
+        if (is_array($payloads)) {
+            $payloads = $payloads[0];
+        }
+
         $parameters = new ParameterSupport(static::class);
 
         $dataConstructor = [];
+
         foreach ($parameters->getConstructorProperties() as $property) {
+            $value = null;
+            $name = $property['value'];
+            $type = $property['type'];
+
             if (in_array($property['value'], array_keys($payloads))) {
-                $dataConstructor[$property['value']] = $payloads[$property['value']];
+                $value = $payloads[$name];
             }
+
+            $dataConstructor[$name] = self::transformValueInTypePropery($type, $value);
         }
 
         $obj = new static(...$dataConstructor);
 
+        $properties = [];
+        foreach($parameters->getProperties() as $property) {
+            $properties[$property['value']] = $property['type'];
+        }
+
         foreach ($payloads as $key => $payload) {
             if (in_array($key, ['id', 'updatedAt', 'createdAt'])) {
-                $obj->{$key} = $payload;
+                $obj->{$key} = self::transformValueInTypePropery($properties[$key], $payload);
             }
         }
 
@@ -145,4 +161,14 @@ abstract class Data implements DataInterface
             throw new NotificationException($this->notification()->messages());
         }
     }
+
+    protected static function transformValueInTypePropery($type, mixed $value): mixed
+    {
+        if ($type == Uuid::class && in_array(gettype($value), ['string'])) {
+            $value = new Uuid($value);
+        }
+
+        return $value;
+    }
+
 }
