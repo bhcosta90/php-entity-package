@@ -8,6 +8,7 @@ use Costa\Entity\Contracts\DataInterface;
 use Costa\Entity\Exceptions\NotificationException;
 use Costa\Entity\Factory\ValidatorFactory;
 use Costa\Entity\Support\NotificationSupport;
+use Costa\Entity\Traits\EventTrait;
 use Costa\Entity\Traits\MakeTrait;
 use Costa\Entity\Traits\MethodMagicTrait;
 use Costa\Entity\Traits\ToArrayTrait;
@@ -22,10 +23,14 @@ abstract class Data implements DataInterface
     use MethodMagicTrait;
     use ToArrayTrait;
     use MakeTrait;
+    use EventTrait;
 
     protected Uuid $id;
+
     protected DateTimeInterface $createdAt;
+
     protected DateTimeInterface $updatedAt;
+
     private NotificationSupport $notification;
 
     /**

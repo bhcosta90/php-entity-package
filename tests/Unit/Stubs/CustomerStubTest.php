@@ -3,13 +3,16 @@
 declare(strict_types=1);
 
 use Costa\Entity\Contracts\DataInterface;
+use Costa\Entity\Contracts\EventInterface;
 use Costa\Entity\Exceptions\NotificationException;
 use Costa\Entity\Exceptions\PropertyException;
 use Costa\Entity\ValueObject\Uuid;
+use Tests\Events\Customer\ChangeNameEvent;
 use Tests\Stubs\AddressStub;
 use Tests\Stubs\BusinessStub;
 use Tests\Stubs\CustomerStub;
 
+use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
 
@@ -32,12 +35,12 @@ describe("CustomerStub Unit Test", function () {
         assertEquals($customer->updatedAt(), $updatedAt->format('Y-m-d H:i:s'));
     });
 
-    test("Creating a customer with array data", function(){
+    test("Creating a customer with array data", function () {
         $customer = CustomerStub::make([
-            "name" =>'testing',
-            "id" => (string) $id = Uuid::make(),
-            "createdAt" =>$createdAt = new DateTime('2020-01-01 00:00:00'),
-            "updatedAt" =>$updatedAt = new DateTime('2020-01-02 00:00:00'),
+            "name" => 'testing',
+            "id" => (string)$id = Uuid::make(),
+            "createdAt" => $createdAt = new DateTime('2020-01-01 00:00:00'),
+            "updatedAt" => $updatedAt = new DateTime('2020-01-02 00:00:00'),
         ]);
         assertInstanceOf(DataInterface::class, $customer);
         assertEquals($customer->id(), $id);
@@ -146,5 +149,28 @@ describe("CustomerStub Unit Test", function () {
     test("Exception when get a property that do not exist", function () {
         $customer = new CustomerStub(name: 'testing');
         expect(fn() => $customer->email)->toThrow(PropertyException::class);
+    });
+
+    describe("Testing update a customer", function () {
+        test("Change name", function () {
+            $customer = new CustomerStub(name: 'testing');
+            $customer->changeName('testing 2');
+
+            assertEquals('testing 2', $customer->name);
+        });
+
+        test("Testing events of customer", function () {
+            $customer = new CustomerStub(name: 'testing');
+            $customer->changeName('testing 2');
+
+            assertCount(1, $customer->events());
+            assertInstanceOf(ChangeNameEvent::class, $customer->events()[0]);
+            assertInstanceOf(EventInterface::class, $customer->events()[0]);
+        });
+
+        test("exception when name is invalid", function(){
+            $customer = new CustomerStub(name: 'testing');
+            expect(fn() => $customer->changeName('t'))->toThrow(NotificationException::class);
+        });
     });
 });
