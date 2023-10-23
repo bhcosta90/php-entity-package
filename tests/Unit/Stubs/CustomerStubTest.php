@@ -163,9 +163,9 @@ describe("CustomerStub Unit Test", function () {
             $customer = new CustomerStub(name: 'testing');
             $customer->changeName('testing 2');
 
-            assertCount(1, $customer->events());
-            assertInstanceOf(ChangeNameEvent::class, $customer->events()[0]);
-            assertInstanceOf(EventInterface::class, $customer->events()[0]);
+            assertCount(1, $customer->getEvents());
+            assertInstanceOf(ChangeNameEvent::class, $customer->getEvents()[0]);
+            assertInstanceOf(EventInterface::class, $customer->getEvents()[0]);
         });
 
         test("exception when name is invalid", function(){
