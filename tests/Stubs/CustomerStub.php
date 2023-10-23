@@ -41,7 +41,7 @@ class CustomerStub extends Data
     {
         if ($name != $this->name) {
             $this->name = $name;
-            $this->add(new ChangeNameEvent($this));
+            $this->addEvent(new ChangeNameEvent($this));
             $this->validated();
         }
 
