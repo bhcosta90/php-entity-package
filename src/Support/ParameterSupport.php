@@ -27,6 +27,14 @@ final class ParameterSupport
         ], $constructor->getParameters());
     }
 
+    /**
+     * @return ReflectionClass
+     */
+    public function getReflectionClass(): ReflectionClass
+    {
+        return new ReflectionClass($this->class);
+    }
+
     public function getProperties(): array
     {
         $reflectionClass = $this->getReflectionClass();
@@ -34,13 +42,5 @@ final class ParameterSupport
             'value' => $property->getName(),
             'type' => $property->getType()->getName(),
         ], $reflectionClass->getProperties());
-    }
-
-    /**
-     * @return ReflectionClass
-     */
-    public function getReflectionClass(): ReflectionClass
-    {
-        return new ReflectionClass($this->class);
     }
 }
