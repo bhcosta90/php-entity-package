@@ -13,7 +13,7 @@ trait EventTrait
      */
     private array $events = [];
 
-    public function add(EventInterface $event): void
+    public function addEvent(EventInterface $event): void
     {
         $this->events[] = $event;
     }
@@ -21,7 +21,7 @@ trait EventTrait
     /**
      * @return EventInterface[]
      */
-    public function events(): array
+    public function getEvents(): array
     {
         return $this->events;
     }
