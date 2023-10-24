@@ -21,9 +21,6 @@ trait ToArrayTrait
 
             $valueProperty = $this->{$property['value']};
 
-//            if ($valueProperty instanceof DateTimeInterface) {
-//                $valueProperty = $valueProperty->format('Y-m-d H:i:s');
-//            }
 
             $valueProperty = match (true) {
                 $valueProperty instanceof DateTimeInterface => $valueProperty->format('Y-m-d H:i:s'),
@@ -42,7 +39,7 @@ trait ToArrayTrait
                     return $newDataValue;
                 })(),
                 $valueProperty instanceof DataInterface => $valueProperty->toArray(),
-                default => $valueProperty && property_exists($valueProperty, 'value')
+                default => is_object($valueProperty) && property_exists($valueProperty, 'value')
                     ? $valueProperty->value
                     : $valueProperty,
             };
