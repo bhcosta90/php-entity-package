@@ -32,6 +32,7 @@ trait MakeTrait
         }
 
         $obj = new static(...$dataConstructor);
+        $obj->events = [];
 
         $properties = [];
         foreach ($parameters->getProperties() as $property) {
