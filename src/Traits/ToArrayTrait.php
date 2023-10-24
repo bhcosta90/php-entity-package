@@ -21,31 +21,31 @@ trait ToArrayTrait
 
             $valueProperty = $this->{$property['value']};
 
-            if ($valueProperty instanceof DateTimeInterface) {
-                $valueProperty = $valueProperty->format('Y-m-d H:i:s');
-            }
+//            if ($valueProperty instanceof DateTimeInterface) {
+//                $valueProperty = $valueProperty->format('Y-m-d H:i:s');
+//            }
 
-            if ($valueProperty instanceof ValueObjectInterface) {
-                $valueProperty = (string)$valueProperty;
-            }
+            $valueProperty = match (true) {
+                $valueProperty instanceof DateTimeInterface => $valueProperty->format('Y-m-d H:i:s'),
+                $valueProperty instanceof ValueObjectInterface => (string)$valueProperty,
+                is_array($valueProperty) => (function () use ($valueProperty) {
+                    $newDataValue = [];
+                    foreach ($valueProperty as $value) {
+                        if ($value instanceof DataInterface) {
+                            $newDataValue[] = $value->toArray();
+                        }
 
-            if (is_array($valueProperty)) {
-                $newDataValue = [];
-                foreach ($valueProperty as $value) {
-                    if ($value instanceof DataInterface) {
-                        $newDataValue[] = $value->toArray();
+                        if ($value instanceof ValueObjectInterface) {
+                            $newDataValue[] = (string)$value;
+                        }
                     }
-
-                    if ($value instanceof ValueObjectInterface) {
-                        $newDataValue[] = (string)$value;
-                    }
-                }
-                $valueProperty = $newDataValue;
-            }
-
-            if ($valueProperty instanceof DataInterface) {
-                $valueProperty = $valueProperty->toArray();
-            }
+                    return $newDataValue;
+                })(),
+                $valueProperty instanceof DataInterface => $valueProperty->toArray(),
+                default => $valueProperty && property_exists($valueProperty, 'value')
+                    ? $valueProperty->value
+                    : $valueProperty,
+            };
 
             $response[$key] = $valueProperty;
         }
