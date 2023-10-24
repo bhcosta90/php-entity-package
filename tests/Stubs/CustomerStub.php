@@ -8,11 +8,14 @@ use Costa\Entity\Data;
 use Costa\Entity\Exceptions\NotificationException;
 use Costa\Entity\ValueObject\Uuid;
 use Tests\Events\Customer\ChangeNameEvent;
+use Tests\Stubs\Enums\DocumentTypeEnum;
 
 class CustomerStub extends Data
 {
     public function __construct(
         protected string $name,
+        protected ?DocumentTypeEnum $documentTypeEnum = null,
+        protected ?string $document = null,
         protected ?BusinessStub $business = null,
         /**
          * @var AddressStub[]
