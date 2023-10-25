@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Costa\Entity\Traits;
 
 use Costa\Entity\Support\ParameterSupport;
+use Costa\Entity\ValueObject\Uuid;
 
 trait MakeTrait
 {
@@ -42,6 +43,8 @@ trait MakeTrait
         foreach ($payloads as $key => $payload) {
             if (in_array($key, ['id', 'updatedAt', 'createdAt']) && !empty($payload)) {
                 $obj->{$key} = self::transformValueInTypePropery($properties[$key], $payload);
+            } else {
+                $obj->{$key} = $payload;
             }
         }
 
