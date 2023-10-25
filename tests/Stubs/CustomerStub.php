@@ -29,14 +29,6 @@ class CustomerStub extends Data
         parent::__construct();
     }
 
-
-    protected function rules(): array
-    {
-        return [
-            'name' => 'required|min:3|max:100',
-        ];
-    }
-
     /**
      * @throws NotificationException
      */
@@ -49,5 +41,12 @@ class CustomerStub extends Data
         }
 
         return $this;
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'name' => 'required|min:3|max:100',
+        ];
     }
 }
