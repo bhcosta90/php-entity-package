@@ -11,7 +11,6 @@ use Tests\Events\Customer\ChangeNameEvent;
 use Tests\Stubs\AddressStub;
 use Tests\Stubs\BusinessStub;
 use Tests\Stubs\CustomerStub;
-
 use Tests\Stubs\Enums\DocumentTypeEnum;
 
 use function PHPUnit\Framework\assertCount;
