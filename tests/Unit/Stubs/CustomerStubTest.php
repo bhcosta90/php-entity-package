@@ -220,7 +220,7 @@ describe("CustomerStub Unit Test", function () {
             assertEquals(0, $customer->balance);
         });
 
-        test("customer set a balance field", function(){
+        test("customer set a balance field", function () {
             $customer = CustomerStub::make(
                 name: 'testing',
                 documentTypeEnum: DocumentTypeEnum::PF,
@@ -232,8 +232,8 @@ describe("CustomerStub Unit Test", function () {
         });
     });
 
-    describe("Testing parameter with string", function(){
-        test("passing a parameters with string", function(){
+    describe("Testing parameter with string", function () {
+        test("passing a parameters with string", function () {
             $customer = CustomerStub::make(
                 name: 'testing',
                 documentTypeEnum: DocumentTypeEnum::PF,
@@ -243,8 +243,8 @@ describe("CustomerStub Unit Test", function () {
                 createdAt: '2020-01-01 00:00:00'
             );
 
-            assertEquals('f6a6277c-73f1-11ee-b962-0242ac120002', (string) $customer->partner);
-            assertEquals('2020-01-01 00:00:00', (string) $customer->createdAt());
+            assertEquals('f6a6277c-73f1-11ee-b962-0242ac120002', (string)$customer->partner);
+            assertEquals('2020-01-01 00:00:00', (string)$customer->createdAt());
 
             $customer = CustomerStub::make([
                 "name" => 'testing',
@@ -252,11 +252,11 @@ describe("CustomerStub Unit Test", function () {
                 "document" => '99999999999',
                 "balance" => 10,
                 "partner" => 'f6a6277c-73f1-11ee-b962-0242ac120002',
-                "created_at" => '2020-01-01 00:00:00'
+                "created_at" => '2020-01-01 00:00:00',
             ]);
 
-            assertEquals('f6a6277c-73f1-11ee-b962-0242ac120002', (string) $customer->partner);
-            assertEquals('2020-01-01 00:00:00', (string) $customer->createdAt());
+            assertEquals('f6a6277c-73f1-11ee-b962-0242ac120002', (string)$customer->partner);
+            assertEquals('2020-01-01 00:00:00', (string)$customer->createdAt());
         });
     });
 });
