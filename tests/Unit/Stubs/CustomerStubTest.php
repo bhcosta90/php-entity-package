@@ -67,6 +67,8 @@ describe("CustomerStub Unit Test", function () {
             'orders' => [],
             'document_type_enum' => null,
             'document' => null,
+            'balance' => 0.0,
+            'partner' => null,
         ], $customer->toArray());
     });
 
@@ -93,6 +95,8 @@ describe("CustomerStub Unit Test", function () {
             'orders' => [],
             'document_type_enum' => null,
             'document' => null,
+            'balance' => 0.0,
+            'partner' => null,
         ], $customer->toArray());
     });
 
@@ -119,6 +123,8 @@ describe("CustomerStub Unit Test", function () {
             'address' => [],
             'document_type_enum' => null,
             'document' => null,
+            'balance' => 0.0,
+            'partner' => null,
         ], $customer->toArray());
     });
 
@@ -143,6 +149,8 @@ describe("CustomerStub Unit Test", function () {
             'address' => [],
             'document_type_enum' => null,
             'document' => null,
+            'balance' => 0.0,
+            'partner' => null,
         ], $customer->toArray());
     });
 
@@ -173,6 +181,8 @@ describe("CustomerStub Unit Test", function () {
             'address' => [],
             'document_type_enum' => 'cpf',
             'document' => '99999999999',
+            'balance' => 0.0,
+            'partner' => null,
         ], $customer->toArray());
     });
 
@@ -196,6 +206,57 @@ describe("CustomerStub Unit Test", function () {
         test("exception when name is invalid", function () {
             $customer = new CustomerStub(name: 'testing');
             expect(fn() => $customer->changeName('t'))->toThrow(NotificationException::class);
+        });
+    });
+
+    describe("Testing a balance property of customer", function () {
+        test("customer with balance 0", function () {
+            $customer = new CustomerStub(
+                name: 'testing',
+                documentTypeEnum: DocumentTypeEnum::PF,
+                document: '99999999999'
+            );
+
+            assertEquals(0, $customer->balance);
+        });
+
+        test("customer set a balance field", function(){
+            $customer = CustomerStub::make(
+                name: 'testing',
+                documentTypeEnum: DocumentTypeEnum::PF,
+                document: '99999999999',
+                balance: 10,
+            );
+
+            assertEquals(10, $customer->balance);
+        });
+    });
+
+    describe("Testing parameter with string", function(){
+        test("passing a parameters with string", function(){
+            $customer = CustomerStub::make(
+                name: 'testing',
+                documentTypeEnum: DocumentTypeEnum::PF,
+                document: '99999999999',
+                balance: 10,
+                partner: 'f6a6277c-73f1-11ee-b962-0242ac120002',
+                createdAt: '2020-01-01 00:00:00'
+            );
+
+            assertEquals('f6a6277c-73f1-11ee-b962-0242ac120002', (string) $customer->partner);
+            assertEquals('2020-01-01 00:00:00', (string) $customer->createdAt());
+
+            $customer = CustomerStub::make([
+                "name" => 'testing',
+                "documentTypeEnum" => DocumentTypeEnum::PF,
+                "document" => '99999999999',
+                "balance" => 10,
+                "partner" => 'f6a6277c-73f1-11ee-b962-0242ac120002',
+                "created_at" => '2020-01-01 00:00:00'
+            ]);
+
+            assertEquals('f6a6277c-73f1-11ee-b962-0242ac120002', (string) $customer->partner);
+            assertEquals('2020-01-01 00:00:00', (string) $customer->createdAt());
         });
     });
 });

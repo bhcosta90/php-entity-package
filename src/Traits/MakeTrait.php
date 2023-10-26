@@ -5,11 +5,18 @@ declare(strict_types=1);
 namespace Costa\Entity\Traits;
 
 use Costa\Entity\Support\ParameterSupport;
+use Costa\Entity\ValueObject\Uuid;
+use DateTime;
+use DateTimeInterface;
+use Exception;
 
 trait MakeTrait
 {
     use ValidateTrait;
 
+    /**
+     * @throws Exception
+     */
     public static function make(mixed ...$payloads): static
     {
         if (!empty($payloads[0])) {
@@ -22,12 +29,12 @@ trait MakeTrait
 
         foreach ($parameters->getConstructorProperties() as $property) {
             $value = null;
-            $name = $property['value'];
+            $name = self::transformName($property['value']);
             $type = $property['type'];
 
             if (in_array($name, array_keys($payloads))) {
                 $value = $payloads[$name];
-                $dataConstructor[$name] = self::transformValueInTypePropery($type, $value);
+                $dataConstructor[$name] = self::transformValueInTypeProperty($type, $value);
             }
         }
 
@@ -40,15 +47,42 @@ trait MakeTrait
         }
 
         foreach ($payloads as $key => $payload) {
-            if (in_array($key, ['id', 'updatedAt', 'createdAt']) && !empty($payload)) {
-                $obj->{$key} = self::transformValueInTypePropery($properties[$key], $payload);
-            } else {
-                $obj->{$key} = $payload;
-            }
+            $key = self::transformName($key);
+            $obj->{$key} = self::transformValueInTypeProperty($properties[$key], $payload);
         }
 
         $obj->validated();
 
         return $obj;
+    }
+
+    /**
+     * @param $property
+     * @return mixed
+     */
+    protected static function transformName($property): mixed
+    {
+        if (property_exists(static::class, $property)) {
+            return $property;
+        }
+
+        $camelCaseString = str_replace('_', '', ucwords($property, '_'));
+        return lcfirst($camelCaseString);
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected static function transformValueInTypeProperty($type, mixed $value): mixed
+    {
+        if (gettype($value) == 'string') {
+            $value = match ($type) {
+                Uuid::class => new Uuid($value),
+                DateTimeInterface::class => new DateTime($value),
+                default => $value,
+            };
+        }
+
+        return $value;
     }
 }

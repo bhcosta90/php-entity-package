@@ -12,6 +12,9 @@ use Tests\Stubs\Enums\DocumentTypeEnum;
 
 class CustomerStub extends Data
 {
+    protected ?Uuid $partner = null;
+    protected float $balance = 0;
+
     public function __construct(
         protected string $name,
         protected ?DocumentTypeEnum $documentTypeEnum = null,
