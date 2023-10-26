@@ -72,15 +72,6 @@ abstract class Data implements DataInterface
         return $this->notification;
     }
 
-    protected static function transformValueInTypePropery($type, mixed $value): mixed
-    {
-        if ($type == Uuid::class && in_array(gettype($value), ['string'])) {
-            $value = new Uuid($value);
-        }
-
-        return $value;
-    }
-
     public function id(): string
     {
         return (string)$this->id;
