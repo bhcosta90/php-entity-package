@@ -19,8 +19,9 @@ trait ToArrayTrait
         foreach ($parameters->getProperties() as $property) {
             $key = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $property['value']));
 
-            $valueProperty = $this->{$property['value']};
-
+            $valueProperty = method_exists($this, $property['value']) 
+                ? $this->{$property['value']}()
+                : $this->{$property['value']};
 
             $valueProperty = match (true) {
                 $valueProperty instanceof DateTimeInterface => $valueProperty->format('Y-m-d H:i:s'),
