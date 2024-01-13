@@ -13,6 +13,10 @@ trait MethodMagicTrait
      */
     public function __get($property)
     {
+        if (method_exists($this, $property)) {
+            return $this->{$property}();
+        }
+
         if (property_exists($this, $property)) {
             return $this->{$property};
         }

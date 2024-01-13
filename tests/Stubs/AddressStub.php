@@ -12,4 +12,8 @@ class AddressStub extends Data
     {
         parent::__construct();
     }
+
+    public function name(){
+        return 'address-' . $this->name;
+    }
 }
