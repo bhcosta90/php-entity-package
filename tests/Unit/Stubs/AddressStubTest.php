@@ -8,7 +8,6 @@ describe("Address Unit Test", function () {
 
     test("testing name with toArray", function () {
         $address = new \Tests\Stubs\AddressStub('testing');
-
         expect($address->toArray()['name'])->toBe("address-testing");
     });
 });
